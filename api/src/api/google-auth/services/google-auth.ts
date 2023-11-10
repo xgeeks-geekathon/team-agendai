@@ -24,6 +24,9 @@ const service = {
         return authUrl;
     },
     async getGoogleAccountFromCode(code) {
+        console.log({
+            code,
+        })
         const { tokens } = await oauth2Client.getToken(code);
         oauth2Client.setCredentials(tokens);
 
