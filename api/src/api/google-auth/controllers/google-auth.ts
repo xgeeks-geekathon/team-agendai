@@ -5,6 +5,7 @@ module.exports = {
    * Redirects users to the Google Authorization screen
    */
   async connect(ctx) {
+    console.log(ctx)
     ctx.redirect(GoogleAuthService.getGoogleAuthURL());
   },
 
@@ -12,6 +13,7 @@ module.exports = {
    * Callback endpoint for handling the OAuth2 callback and token exchange
    */
   async callback(ctx) {
+    console.log(ctx)
     const { code } = ctx.query;
     try {
       const data = await GoogleAuthService.getGoogleAccountFromCode(code);
