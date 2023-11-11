@@ -17,6 +17,7 @@ declare namespace Events {
     startDate: Date;
     endDate: Date;
     updatedAt: Date;
+    task: number;
   }
 
   export interface Event extends EventAttributes {
