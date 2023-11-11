@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Avatar, Box, Hidden, IconButton, Stack, Toolbar } from '@mui/material';
-import { Notifications } from '@mui/icons-material';
 
 import { useRouter } from '@core/hooks/useRouter';
 
 import { AuthContext } from '@modules/Auth/contexts';
-import { Authenticated } from '@modules/Auth/components';
 
 import config from '@shared/config';
 
@@ -27,7 +25,6 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
 
   return (
     <Hidden smDown>
@@ -53,19 +50,6 @@ export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
               {children}
             </Box>
             <Box ml="auto" />
-            {config.featureFlags.notifications && (
-              <Authenticated>
-                <IconButton
-                  size="large"
-                  color="secondary"
-                  edge="end"
-                  component={Link}
-                  to={router.notifications.path}
-                >
-                  <Notifications/>
-                </IconButton>
-              </Authenticated>
-            )}
             {isLoggedIn && (
               <UserMenu anchorEl={anchorElUser} onCloseRequest={handleCloseUserMenu}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

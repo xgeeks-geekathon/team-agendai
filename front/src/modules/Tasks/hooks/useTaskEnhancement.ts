@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { cacheKeys } from '../config';
-import { eventsClient } from '../client/eventClient';
+import { tasksClient } from '../client/tasksClient';
 
 export type Params = {
   id: number;
@@ -16,10 +16,10 @@ const defaultOptions: Partial<Options> = {
   enabled: true,
 };
 
-export const useEvent = (params: Params, options: Partial<Options> = defaultOptions) => {
+export const useTaskEnhancement = (params: Params, options: Partial<Options> = defaultOptions) => {
   const { data: { data } = {}, status, error } = useQuery({
-    queryKey: [cacheKeys.getEvent, params],
-    queryFn: () => eventsClient.getEvent(params),
+    queryKey: [cacheKeys.getEnhancement, params],
+    queryFn: () => tasksClient.getTaskEnhancement(params),
     enabled: options.enabled,
     retry: options.retry,
   });
@@ -27,6 +27,6 @@ export const useEvent = (params: Params, options: Partial<Options> = defaultOpti
   return {
     status,
     error,
-    event: data,
+    enhancement: data,
   };
 };

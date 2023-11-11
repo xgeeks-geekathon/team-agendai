@@ -9,11 +9,11 @@ export const Events = () => {
   const dictionary = useDictionary();
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={3} height="100%">
       <Box mb={2} textAlign="center">
         <Typography variant="h2">{dictionary.events.list.title}</Typography>
       </Box>
-      <Box>
+      <Box height="100%">
         <EventsGrid
           filters={{
             limit: 1000,

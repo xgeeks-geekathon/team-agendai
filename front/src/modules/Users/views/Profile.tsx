@@ -55,7 +55,6 @@ export const Profile: React.FC = () => {
   const dictionary = useDictionary();
   const { logout } = React.useContext(AuthContext);
   const { user, status } = useMe();
-  const { openDialog } = React.useContext(DialogContext);
 
   if (status === 'error') {
     return <MessageFeedbackView height="100%" />;

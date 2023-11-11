@@ -24,8 +24,9 @@ const Typography = () => {
       fontWeight: 600,
     },
     h4: {
+      fontFamily: '"Crimson Text", serif',
       fontSize: '1.25rem',
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h5: {
       fontSize: '1.125rem',

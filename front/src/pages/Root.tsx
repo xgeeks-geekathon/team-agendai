@@ -9,7 +9,6 @@ import { AuthContext } from '@modules/Auth/contexts';
 import { Authenticated, NotAuthenticated } from '@modules/Auth/components';
 import { Login } from './Auth/Login';
 import { Signup } from './Auth/Signup';
-import { ResetPassword } from './Auth/ResetPassword';
 import { GoogleCallback } from './Auth/GoogleCallback';
 import { Home } from './Home/Home';
 import { Profile } from './Users/Profile';
@@ -19,6 +18,7 @@ import { Events } from './Events/Events';
 import { ViewBoard } from './Board/ViewBoard';
 
 export const Root = () => {
+  
   const { router } = React.useContext(RoutingContext);
   const { status } = React.useContext(AuthContext);
   const location = useLocation();
@@ -36,7 +36,6 @@ export const Root = () => {
       <NotAuthenticated>
         <Routes>
           <Route path={router.auth.login.path} element={<Login/>}/>
-          <Route path={router.auth.resetPassword.path} element={<ResetPassword/>}/>
           <Route path={router.auth.signup.path} element={<Signup/>}/>
           <Route path={router.auth.google.callback.path} element={<GoogleCallback/>}/>
           <Route path="*" element={<Navigate to={router.auth.login.path}/>}/>
