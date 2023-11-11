@@ -11,7 +11,7 @@ export const Events = () => {
   return (
     <Stack spacing={3}>
       <Box mb={2} textAlign="center">
-        <Typography variant="h2">Events List</Typography>
+        <Typography variant="h2">{dictionary.events.list.title}</Typography>
       </Box>
       <Box>
         <EventsGrid
@@ -25,7 +25,6 @@ export const Events = () => {
             },
             item: {
               xs: 12,
-              sm: 12,
             },
           }}
         />

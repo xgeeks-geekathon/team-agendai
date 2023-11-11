@@ -19,9 +19,6 @@ export const BoardsGrid: React.FC<Props> = ({ filters, renderItem, slotProps }) 
 
   const { boards, status } = useBoards(filters);
 
-  console.log({
-    boards,
-  });
   if (status === 'pending' || !boards) {
     return <BodyLoading height="100%"/>;
   }

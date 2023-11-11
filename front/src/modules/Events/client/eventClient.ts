@@ -9,7 +9,7 @@ const EventsApiBaseUrl = import.meta.env.VITE__API_URL;
 const getEvent = (params: { id: number }): Promise<AxiosResponse<Events.Event>> => {
   return fakeRequest({
     options: {
-      url: `${EventsApiBaseUrl}/Events/${params.id}`,
+      url: `${EventsApiBaseUrl}/events/${params.id}`,
       method: 'GET',
     },
     response: {
@@ -25,7 +25,7 @@ const getEvent = (params: { id: number }): Promise<AxiosResponse<Events.Event>> 
 const getEvents = (params: Events.GetListParams): Promise<AxiosResponse<MT.Query.PaginatedResults<Events.Event>>> => {
   return fakeRequest({
     options: {
-      url: `${EventsApiBaseUrl}/Events`,
+      url: `${EventsApiBaseUrl}/events`,
       method: 'GET',
       params,
     },
@@ -48,7 +48,7 @@ const getEvents = (params: Events.GetListParams): Promise<AxiosResponse<MT.Query
 const createEvent = (data: Events.Create): Promise<AxiosResponse<Events.Event>> => {
   return request({
     options: {
-      url: `${EventsApiBaseUrl}/Events/`,
+      url: `${EventsApiBaseUrl}/events/`,
       method: 'POST',
       data,
     },
@@ -61,7 +61,7 @@ const createEvent = (data: Events.Create): Promise<AxiosResponse<Events.Event>> 
 const editEvent = (data: Events.Edit): Promise<AxiosResponse<Events.Event>> => {
   return request({
     options: {
-      url: `${EventsApiBaseUrl}/Events/${data.id}/`,
+      url: `${EventsApiBaseUrl}/events/${data.id}/`,
       method: 'PUT',
       data,
     },
@@ -74,13 +74,13 @@ const editEvent = (data: Events.Edit): Promise<AxiosResponse<Events.Event>> => {
 const deleteEvent = (params: { id: number | string }): Promise<AxiosResponse> => {
   return request({
     options: {
-      url: `${EventsApiBaseUrl}/Events/${params.id}`,
+      url: `${EventsApiBaseUrl}/events/${params.id}`,
       method: 'DELETE',
     },
   });
 };
 
-export const EventsClient = {
+export const eventsClient = {
   getEvent,
   getEvents,
   createEvent,
