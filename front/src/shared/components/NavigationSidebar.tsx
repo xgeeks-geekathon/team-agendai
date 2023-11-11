@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { BottomNavigation, BottomNavigationAction, Box, Collapse, Divider, Drawer, Hidden, IconButton, List, ListItemButtonProps, ListItemIcon, ListItemText, MenuItem, Paper, SwipeableDrawer, Tooltip } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Box, Collapse, Divider, Drawer, Hidden, IconButton, List, ListItemButtonProps, ListItemIcon, ListItemText, MenuItem, Paper, Tooltip } from '@mui/material';
 import { AutoStories, ChevronLeft, ChevronRight, ExpandLess, ExpandMore, HomeWork, Person } from '@mui/icons-material';
 
 import { PermissionContext } from '@core/contexts';
