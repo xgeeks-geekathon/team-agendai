@@ -4,11 +4,11 @@ import { Divider, List, ListItem, ListItemProps, ListProps } from '@mui/material
 import { BodyLoading } from '@core/components/layout/BodyLoading';
 import { MessageFeedbackView } from '@core/components/MessageFeedbackView';
 
-import { useCharacters } from '../hooks/useCharacters';
+import { useTasks } from '../hooks/useTasks';
 
 export interface Props {
-  renderItem: (character: Characters.Character) => React.ReactNode;
-  filters?: Characters.GetListParams;
+  renderItem: (character: Tasks.Task) => React.ReactNode;
+  filters?: Tasks.GetListParams;
   slotProps?: {
     list?: ListProps;
     listItem?: ListItemProps;
@@ -16,24 +16,24 @@ export interface Props {
   showDivider?: boolean;
 }
 
-export const CharactersList: React.FC<Props> = ({ filters, renderItem, slotProps, showDivider = false }) => {
+export const TasksList: React.FC<Props> = ({ filters, renderItem, slotProps, showDivider = false }) => {
 
-  const { characters, status } = useCharacters(filters);
+  const { tasks, status } = useTasks(filters);
 
-  if (status === 'pending' || !characters) {
+  if (status === 'pending' || !tasks) {
     return <BodyLoading height="100%"/>;
   }
 
   return (
     <React.Fragment>
-      {characters.length === 0 ? (
-        <MessageFeedbackView height="100%" message="No characters" />
+      {tasks.length === 0 ? (
+        <MessageFeedbackView height="100%" message="No tasks" />
       ) : (
         <List {...slotProps?.list}>
-          {characters.map(character => (
-            <React.Fragment key={character.id}>
+          {tasks.map(task => (
+            <React.Fragment key={task.id}>
               {showDivider && (<Divider component="li"/>)}
-              <ListItem {...slotProps?.listItem}>{renderItem(character)}</ListItem>
+              <ListItem {...slotProps?.listItem}>{renderItem(task)}</ListItem>
             </React.Fragment>
           ))}
         </List>

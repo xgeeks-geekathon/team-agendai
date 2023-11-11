@@ -9,8 +9,6 @@ import { BodyLoading } from '@core/components/layout/BodyLoading';
 import { AuthContext } from '@modules/Auth/contexts';
 import { useMe } from '@modules/Auth/hooks/useMe';
 import { useMeCrud } from '@modules/Auth/hooks/useMeCrud';
-import { CharactersList } from '@modules/Characters/partials/CharactersList';
-import { CharacterListItemButton } from '@modules/Characters/components/CharacterListItemButton';
 
 import { UserForm } from '../partials/UserForm';
 
@@ -75,28 +73,6 @@ export const Profile: React.FC = () => {
       <Stack spacing={3}>
         <Paper component={Box} p={3}>
           <ProfileView {...user} />
-        </Paper>
-        <Box mb={2} textAlign="center">
-          <Typography variant="h2">{dictionary.users.profile.childrenSectionTitle}</Typography>
-        </Box>
-        <Paper component={Box} p={3}>
-          <Box mb={2}>
-            <CharactersList
-              renderItem={character => <CharacterListItemButton {...character} />}
-              slotProps={{
-                list: {
-                  disablePadding: true,
-                },
-                listItem: {
-                  disablePadding: true,
-                  disableGutters: true,
-                },
-              }}
-            />
-          </Box>
-          <Button fullWidth size="large" onClick={() => openDialog('createCharacter')}>
-            Add a child
-          </Button>
         </Paper>
         <Button fullWidth color="secondary" variant="text" size="large" onClick={logout}>
           Logout

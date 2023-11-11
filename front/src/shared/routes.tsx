@@ -32,6 +32,12 @@ export const routes = {
       view: (boardId: string | number = ':boardId') => `/${boardId}`,
     },
   },
+  tasks: {
+    path: '/tasks',
+    routes: {
+      view: (taskId: string | number = ':taskId') => `/${taskId}`,
+    },
+  },
 };
 
 export const navigation = (router: MT.Routing.RecursiveRoutes<typeof routes>, dictionary: Dictionary): MT.Navigation.Config => ({

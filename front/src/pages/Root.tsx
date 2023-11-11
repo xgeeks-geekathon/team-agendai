@@ -15,7 +15,7 @@ import { Home } from './Home/Home';
 import { Profile } from './Users/Profile';
 import { Onboarding } from './Users/Onboarding';
 import { Boards } from './Board/Boards';
-import { Board } from './Board/Board';
+import { ViewBoard } from './Board/ViewBoard';
 
 export const Root = () => {
   const { router } = React.useContext(RoutingContext);
@@ -47,7 +47,7 @@ export const Root = () => {
           <Route path={router.onboarding.step().path} element={<Onboarding/>}/>
           <Route path={router.profile.path} element={<Profile/>}/>
           <Route path={router.boards.path} element={<Boards/>}/>
-          <Route path={router.boards.view().path} element={<Board/>}/>
+          <Route path={router.boards.view().path} element={<ViewBoard/>}/>
           <Route path="*" element={<Navigate to={router.home.path}/>}/>
         </Routes>
       </Authenticated>

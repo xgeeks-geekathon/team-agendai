@@ -27,6 +27,6 @@ export const useBoard = (params: Params, options: Partial<Options> = defaultOpti
   return {
     status,
     error,
-    board: data?.data,
+    board: data,
   };
 };

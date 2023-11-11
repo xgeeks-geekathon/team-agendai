@@ -5,7 +5,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { useDictionary } from '@core/hooks/useDictionary';
 
-type FormCrud = Omit<Characters.Crud, 'user'>;
+type FormCrud = Tasks.Create;
 
 type Fields = keyof (FormCrud & {
   submit: boolean;
@@ -14,19 +14,23 @@ type Fields = keyof (FormCrud & {
 
 interface Props {
   defaultValues?: Partial<FormCrud>;
-  onSubmitRequest: (values: Characters.Crud) => void;
+  onSubmitRequest: (values: Tasks.Create) => void;
   onSubmitButtonText: string;
   disabledFields?: Array<Fields>;
   hiddenFields?: Array<Fields>;
 }
 
 const DEFAULT_VALUES: Partial<FormCrud> = {
-  name: '',
+  cost: 0,
 };
 
-
-
-export const CharacterForm: React.FC<Props> = ({ defaultValues = {}, onSubmitRequest, onSubmitButtonText,  disabledFields, hiddenFields }) => {
+export const TaskForm: React.FC<Props> = ({
+  defaultValues = {},
+  onSubmitRequest,
+  onSubmitButtonText,
+  disabledFields,
+  hiddenFields,
+}) => {
 
   const dictionary = useDictionary();
 
@@ -62,19 +66,19 @@ export const CharacterForm: React.FC<Props> = ({ defaultValues = {}, onSubmitReq
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        {isFieldVisible('name') && (
+        {isFieldVisible('cost') && (
           <Grid item xs={12}>
             <Controller
-              name="name"
+              name="cost"
               control={control}
               rules={{ required: dictionary.forms.validations.required }}
               render={({ field, fieldState }) => (
                 <TextField
                   {...field}
-                  label={dictionary.forms.contact.fieldName}
+                  label={dictionary.forms.task.fieldCost}
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
-                  disabled={isFieldDisabled('name')}
+                  disabled={isFieldDisabled('cost')}
                 />
               )}
             />

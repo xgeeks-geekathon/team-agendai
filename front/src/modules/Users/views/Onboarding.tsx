@@ -7,8 +7,6 @@ import { DialogContext } from '@core/contexts';
 import { useDictionary } from '@core/hooks/useDictionary';
 
 import { useAuth } from '@modules/Auth/hooks/useAuth';
-import { CharactersList } from '@modules/Characters/partials/CharactersList';
-import { CharacterButton } from '@modules/Characters/components/CharacterButton';
 
 import { useOnboardingStepContent } from '../hooks/useOnboardingStepContent';
 
@@ -100,27 +98,7 @@ export const Onboarding: React.FC<Props> = ({ stepNumber = '1' }) => {
             <Box component={Paper} p={2}>
               <Typography variant="h2" textAlign="center" mb={3}>{dictionary.users.onboarding.form.title}</Typography>
               <Stack direction="row" spacing={1}>
-                <CharactersList
-                  renderItem={character => <CharacterButton {...character} />}
-                  slotProps={{
-                    list: {
-                      disablePadding: true,
-                      sx: {
-                        display: 'inline-flex',
-                      },
-                    },
-                    listItem: {
-                      disablePadding: true,
-                      disableGutters: true,
-                      sx: {
-                        width: 'auto',
-                        '& + &': {
-                          marginLeft: 1,
-                        },
-                      },
-                    },
-                  }}
-                />
+                
                 <Button variant="text" onClick={() => openDialog('createCharacter')}>
                   Add a Jira board
                 </Button>

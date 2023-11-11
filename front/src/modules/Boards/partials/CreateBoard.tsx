@@ -7,7 +7,7 @@ import { useBoardCrud } from '../hooks/useBoardCrud';
 import { BoardForm } from './BoardForm';
 
 export interface Props {
-  onSuccess?: (trip: Characters.Character) => void;
+  onSuccess?: (trip: Boards.Board) => void;
 }
 export const CreateBoard: React.FC<Props> = ({ onSuccess = noop }) => {
 

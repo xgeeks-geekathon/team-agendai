@@ -249,6 +249,9 @@ export const dictionary = {
     board: {
       fieldAccessToken: 'Access token',
     },
+    task: {
+      fieldCost: 'Cost',
+    },
 
     validations: {
       required: 'This Field is Required',

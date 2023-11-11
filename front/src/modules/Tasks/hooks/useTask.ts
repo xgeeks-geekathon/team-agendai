@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { cacheKeys } from '../config';
-import { charactersClient } from '../client/characterClient';
+import { tasksClient } from '../client/tasksClient';
 
 export type Params = {
   id: number;
@@ -16,10 +16,10 @@ const defaultOptions: Partial<Options> = {
   enabled: true,
 };
 
-export const useCharacter = (params: Params, options: Partial<Options> = defaultOptions) => {
+export const useTask = (params: Params, options: Partial<Options> = defaultOptions) => {
   const { data: { data } = {}, status, error } = useQuery({
-    queryKey: [cacheKeys.getCharacter, params],
-    queryFn: () => charactersClient.getCharacter(params),
+    queryKey: [cacheKeys.getTask, params],
+    queryFn: () => tasksClient.getTask(params),
     enabled: options.enabled,
     retry: options.retry,
   });
@@ -27,6 +27,6 @@ export const useCharacter = (params: Params, options: Partial<Options> = default
   return {
     status,
     error,
-    character: data?.data,
+    task: data,
   };
 };

@@ -5,20 +5,20 @@ import { FeedbackContext } from '@core/contexts';
 import { useDictionary } from '@core/hooks/useDictionary';
 
 import { cacheKeys } from '../config';
-import { charactersClient } from '../client/characterClient';
+import { tasksClient } from '../client/tasksClient';
 
-export const useCharacterCrud = () => {
+export const useTaskCrud = () => {
 
   const dictionary = useDictionary();
   const { triggerFeedback, genericErrorFeedback } = React.useContext(FeedbackContext);
   const queryClient = useQueryClient();
 
-  const createCharacter = useMutation({
-    mutationFn: charactersClient.createCharacter,
-    mutationKey: [cacheKeys.createCharacter],
+  const createTask = useMutation({
+    mutationKey: [cacheKeys.createTask],
+    mutationFn: tasksClient.createTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [cacheKeys.getCharacters],
+        queryKey: [cacheKeys.getTasks],
       });
       triggerFeedback({
         severity: 'success',
@@ -30,16 +30,16 @@ export const useCharacterCrud = () => {
     },
   });
 
-  const editCharacter = useMutation({
-    mutationFn: ({ id, ...data }: Characters.Edit) => charactersClient.editCharacter({ id, ...data }),
-    mutationKey: [cacheKeys.editCharacter],
+  const editTask = useMutation({
+    mutationKey: [cacheKeys.editTask],
+    mutationFn: ({ id, ...data }: Tasks.Edit) => tasksClient.editTask({ id, ...data }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [cacheKeys.getCharacters],
+        queryKey: [cacheKeys.getTasks],
       });
       queryClient.invalidateQueries({
-        queryKey: [cacheKeys.getCharacter, {
-          id: data.data.data.id,
+        queryKey: [cacheKeys.getTask, {
+          id: data.data.id,
         }],
       });
       triggerFeedback({
@@ -52,16 +52,16 @@ export const useCharacterCrud = () => {
     },
   });
 
-  const deleteCharacter = useMutation({
-    mutationFn: (id: number) => charactersClient.deleteCharacter({ id }),
-    mutationKey: [cacheKeys.deleteCharacter],
+  const deleteTask = useMutation({
+    mutationKey: [cacheKeys.deleteTask],
+    mutationFn: (id: number) => tasksClient.deleteTask({ id }),
     onSuccess: (data, id) => {
       queryClient.invalidateQueries({
-        queryKey: [cacheKeys.getCharacters],
+        queryKey: [cacheKeys.getTasks],
       });
       queryClient.removeQueries({
-        queryKey: [cacheKeys.getCharacter, {
-          id,
+        queryKey: [cacheKeys.getTask, {
+          id: data.data.id,
         }],
       });
       triggerFeedback({
@@ -75,8 +75,8 @@ export const useCharacterCrud = () => {
   });
 
   return {
-    createCharacter: createCharacter.mutateAsync,
-    editCharacter: editCharacter.mutateAsync,
-    deleteCharacter: deleteCharacter.mutateAsync,
+    createTask: createTask.mutateAsync,
+    editTask: editTask.mutateAsync,
+    deleteTask: deleteTask.mutateAsync,
   };
 };
