@@ -1,9 +1,9 @@
-const router = {
+const routes = {
     routes: [{
         method: 'GET',
-        path: '/jiras/tickets',
+        path: '/jira/tickets',
         handler: 'api::jira.jira.tickets',
     }],
 };
 
-export default router;
+module.exports = routes;
