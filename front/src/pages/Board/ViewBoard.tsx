@@ -5,8 +5,7 @@ import { Box, Container } from '@mui/material';
 import { useRouter } from '@core/hooks/useRouter';
 
 import { ViewBoard as ViewBoardView } from '@modules/Boards/views/ViewBoard';
-import { TasksList } from '@modules/Tasks/partials/TaskList';
-import { TaskListItemCard } from '@modules/Tasks/partials/TaskListItemCard';
+import { SorteableTaskList } from '@modules/Tasks/partials/SorteableTaskList/SorteableTaskList';
 import { DialogContext } from '@core/contexts';
 
 export const ViewBoard = () => {
@@ -32,12 +31,12 @@ export const ViewBoard = () => {
     <Container maxWidth="md" disableGutters>
       <Box pt={8}>
         <ViewBoardView boardId={id} />
-        <TasksList
+        <SorteableTaskList
           filters={{
             limit: 1000,
             board: id,
           }}
-          renderItem={task => <TaskListItemCard {...task} onClick={openTask} />}
+          onTaskClick={openTask}
         />
       </Box>
     </Container>
