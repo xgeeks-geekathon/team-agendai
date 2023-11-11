@@ -5,6 +5,6 @@ declare namespace MT {
   };
   
   export namespace Dialogs { 
-    export type Dialog = 'nativeMobileApp' | 'search' | 'createBoard' | 'editBoard' | 'createCharacter' | 'editCharacter' | 'createCustomAttribute';
+    export type Dialog = 'createBoard' | 'editBoard' | 'viewTask';
   }
 };

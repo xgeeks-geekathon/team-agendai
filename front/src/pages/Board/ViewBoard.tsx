@@ -7,10 +7,19 @@ import { useRouter } from '@core/hooks/useRouter';
 import { ViewBoard as ViewBoardView } from '@modules/Boards/views/ViewBoard';
 import { TasksList } from '@modules/Tasks/partials/TaskList';
 import { TaskListItemCard } from '@modules/Tasks/partials/TaskListItemCard';
+import { DialogContext } from '@core/contexts';
 
 export const ViewBoard = () => {
   const { boardId = null } = useParams();
   const router = useRouter();
+
+  const { openDialog } = React.useContext(DialogContext);
+
+  const openTask = React.useCallback((id: number) => {    
+    openDialog('viewTask', {
+      taskId: id,
+    });
+  }, [openDialog]);
 
   if (!boardId) {
     router.home.go();
@@ -28,7 +37,7 @@ export const ViewBoard = () => {
             limit: 1000,
             board: id,
           }}
-          renderItem={task => <TaskListItemCard {...task} />}
+          renderItem={task => <TaskListItemCard {...task} onClick={openTask} />}
         />
       </Box>
     </Container>

@@ -40,13 +40,6 @@ const config: MT.Config = {
       edit: false,
       delete: false,
     },
-    characters: {
-      list: false,
-      view: true,
-      create: false,
-      edit: false,
-      delete: false,
-    },
     boards: {
       list: false,
       view: true,
@@ -54,7 +47,7 @@ const config: MT.Config = {
       edit: false,
       delete: false,
     },
-    attributes: {
+    tasks: {
       list: false,
       view: true,
       create: false,
@@ -63,7 +56,7 @@ const config: MT.Config = {
     },
   },
   routes: routes,
-  dialogs: ['nativeMobileApp', 'search', 'createBoard', 'editBoard', 'createCharacter', 'editCharacter', 'createCustomAttribute'],
+  dialogs: ['createBoard', 'editBoard', 'viewTask'],
 };
 
 export const googleMapsApiKey =  import.meta.env.VITE__GOOGLE_MAPS_KEY;

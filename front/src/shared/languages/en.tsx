@@ -144,6 +144,16 @@ export const dictionary = {
     },
   },
 
+  tasks: {
+    list: {
+      title: 'My tasks',
+    },
+
+    view: {
+      title: 'Task',
+    },
+  },
+
   characters: {
     list: {
       title: 'Contacts',

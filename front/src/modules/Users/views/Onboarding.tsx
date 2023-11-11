@@ -35,7 +35,7 @@ export const Onboarding: React.FC<Props> = ({ stepNumber = '1' }) => {
             alt={config.projectName}
           />
         </Stack>
-        {['1', '2', '3'].includes(`${stepNumber}`) && (
+        {['1'].includes(`${stepNumber}`) && (
           <React.Fragment>
             <Box position="relative">
               <Stack direction="row" justifyContent="space-evenly">
@@ -93,13 +93,13 @@ export const Onboarding: React.FC<Props> = ({ stepNumber = '1' }) => {
             <Box mt="auto"/>
           </React.Fragment>
         )}
-        {(stepNumber === '4' && !!user) && (
+        {(stepNumber === '2' && !!user) && (
           <React.Fragment>
             <Box component={Paper} p={2}>
               <Typography variant="h2" textAlign="center" mb={3}>{dictionary.users.onboarding.form.title}</Typography>
               <Stack direction="row" spacing={1}>
                 
-                <Button variant="text" onClick={() => openDialog('createCharacter')}>
+                <Button variant="text" onClick={() => openDialog('createBoard')}>
                   Add a Jira board
                 </Button>
               </Stack>
