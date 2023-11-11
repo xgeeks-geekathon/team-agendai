@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import { fakeRequest, request } from '@core/clients/baseClient';
 
 import { mapUserData } from './authClient.formatter';
+import { fakeMe } from './authClient.mocks';
 
 const authApiBaseUrl = `${import.meta.env.VITE__API_URL}`;
 
@@ -47,10 +48,7 @@ const getMe = (): Promise<AxiosResponse<Users.User>> => {
     },
     response: {
       status: 200,
-      data: {
-        id: 1,
-        email: 'email@example.com',
-      },
+      data: fakeMe,
     },
   }).then((data: AxiosResponse<Users.UserApi>) => ({
     ...data,
