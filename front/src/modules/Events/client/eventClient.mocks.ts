@@ -6,7 +6,7 @@ export const getFakeEvent = () => ({
   description: faker.lorem.sentence(),
   start_date: faker.date.future().getUTCDate(),
   end_date: faker.date.anytime().getUTCDate(),
-  attendees: Array.from({ length: 10 }).map(() => ({
+  attendees: Array.from({ length: 3 }).map(() => ({
     id: faker.string.uuid(),
     name: faker.name.firstName(),
     email: faker.internet.email(),

@@ -26,7 +26,7 @@ export const EventListItemCard: React.FC<Events.Event> = event => {
       </CardActionArea>
       <CardActions disableSpacing>
         {event.attendees.map((attendee: any, key:any) => (
-          <Avatar key={key} alt={attendee.name} src={attendee.avatar} />
+          <Avatar sx={{ width: 24, height: 24 }} key={key} alt={attendee.name} src={attendee.avatar} />
         ))}
       </CardActions>
     </Card>
