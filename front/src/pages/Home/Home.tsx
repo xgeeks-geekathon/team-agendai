@@ -1,26 +1,42 @@
 import React from 'react';
-import { Box, Container, Paper, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, Stack, Typography } from '@mui/material';
 
 import { useDictionary } from '@core/hooks/useDictionary';
 
+import { BoardsGrid } from '@modules/Boards/partials/BoardsGrid';
+import { BoardListItemCard } from '@modules/Boards/partials/BoardListItemCard';
 import { DialogContext } from '@core/contexts';
-import { ViewCalendar } from '@modules/Calendar/views/ViewCalendar';
 
 export const Home = () => {
   const { openDialog } = React.useContext(DialogContext);
   const dictionary = useDictionary();
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="sm">
       <Box pt={3} pb={{ xs: 11, sm: 3 }}>
         <Stack spacing={3}>
+          <Paper component={Box} p={4}>
+            <Button fullWidth onClick={() => openDialog('createBoard')}>{dictionary.home.newBoardButton}</Button>
+          </Paper>
           <Box mb={2} textAlign="center">
-            <Typography variant="h2">Your Calendar</Typography>
+            <Typography variant="h2">{dictionary.home.boards.title}</Typography>
           </Box>
           <Box>
-            <Paper sx={{ p: 3 }}>
-              <ViewCalendar event={0} chapter={0}></ViewCalendar>
-            </Paper>
+            <BoardsGrid
+              filters={{
+                pageSize: 4,
+              }}
+              renderItem={board => <BoardListItemCard {...board} />}
+              slotProps={{
+                container: {
+                  spacing: 2,
+                },
+                item: {
+                  xs: 6,
+                  sm: 4,
+                },
+              }}
+            />
           </Box>
         </Stack>
       </Box>

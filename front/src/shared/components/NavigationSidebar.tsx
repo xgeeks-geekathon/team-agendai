@@ -199,6 +199,7 @@ export const NavigationSidebar: React.FC<Props> = ({ open, onOpenRequest, onClos
               sx={{ backgroundColor: 'transparent', color: 'background.default' }}
             >
               <BottomNavigationAction component={NavLink} to={router.home.path} label="Home" icon={<HomeWork/>} />
+              <BottomNavigationAction component={NavLink} to={router.events.path} label="Events" icon={<HomeWork/>} />
               <BottomNavigationAction component={NavLink} to={router.boards.path} label="Boards" icon={<AutoStories/>} />
               <BottomNavigationAction component={NavLink} to={router.profile.path} label="Profile" icon={<Person/>} />
             </BottomNavigation>
