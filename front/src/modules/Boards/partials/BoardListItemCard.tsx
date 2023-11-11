@@ -11,7 +11,7 @@ export const BoardListItemCard: React.FC<Boards.Board> = board => {
 
   return (
     <Card sx={{ height: '100%' }}>
-      <CardActionArea component={Link} to={router.boards.view(board.id, 1).path} sx={{ height: '100%' }}>
+      <CardActionArea component={Link} to={router.boards.view(board.id).path} sx={{ height: '100%' }}>
         <CardContent>
           <Typography gutterBottom variant="body2" color="secondary">{formatDistanceToNow(board.createdAt, { addSuffix: true })}</Typography>
           <Typography gutterBottom variant="h6" component="div">

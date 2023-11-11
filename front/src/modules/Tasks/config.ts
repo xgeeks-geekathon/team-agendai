@@ -7,4 +7,7 @@ export const cacheKeys = {
   generateTaskCover: 'generateTaskCover',
   getChapterSections: 'getChapterSections',
   generateSectionCover: 'generateSectionCover',
+  getEnhancement: 'getEnhancement',
+  generateEnhancement: 'generateEnhancement',
+  bulkPriorityUpdate: 'bulkPriorityUpdate',
 };

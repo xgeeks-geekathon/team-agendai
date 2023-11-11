@@ -5,8 +5,8 @@ import { Calendar } from '@modules/Events/views/Calendar';
 
 export const Home = () => {
   return (
-    <Container>
-      <Box pt={3} pb={{ xs: 11, sm: 3 }}>
+    <Container sx={{ height: '100%' }}>
+      <Box pt={3} pb={{ xs: 11, sm: 3 }} height="100%">
         <Calendar />
       </Box>
     </Container>

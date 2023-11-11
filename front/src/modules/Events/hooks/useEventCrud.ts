@@ -5,7 +5,7 @@ import { FeedbackContext } from '@core/contexts';
 import { useDictionary } from '@core/hooks/useDictionary';
 
 import { cacheKeys } from '../config';
-import { EventsClient } from '../client/eventClient';
+import { eventsClient } from '../client/eventClient';
 
 export const useEventCrud = () => {
 
@@ -15,7 +15,7 @@ export const useEventCrud = () => {
 
   const createEvent = useMutation({
     mutationKey: [cacheKeys.createEvent],
-    mutationFn: EventsClient.createEvent,
+    mutationFn: eventsClient.createEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getEvents],
@@ -32,7 +32,7 @@ export const useEventCrud = () => {
 
   const editEvent = useMutation({
     mutationKey: [cacheKeys.editEvent],
-    mutationFn: ({ id, ...data }: Events.Edit) => EventsClient.editEvent({ id, ...data }),
+    mutationFn: ({ id, ...data }: Events.Edit) => eventsClient.editEvent({ id, ...data }),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getEvents],
@@ -54,7 +54,7 @@ export const useEventCrud = () => {
 
   const deleteEvent = useMutation({
     mutationKey: [cacheKeys.deleteEvent],
-    mutationFn: (id: number) => EventsClient.deleteEvent({ id }),
+    mutationFn: (id: number) => eventsClient.deleteEvent({ id }),
     onSuccess: (data, id) => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getEvents],

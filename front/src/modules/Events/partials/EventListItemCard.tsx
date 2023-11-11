@@ -8,7 +8,7 @@ export const EventListItemCard: React.FC<Events.Event> = event => {
 
   const { openDialog } = React.useContext(DialogContext);
 
-  const openTask = React.useCallback(() => {    
+  const openTask = React.useCallback(() => {
     openDialog('viewTask', {
       taskId: event.task,
     });

@@ -54,6 +54,13 @@ const config: MT.Config = {
       edit: false,
       delete: false,
     },
+    events: {
+      list: false,
+      view: true,
+      create: false,
+      edit: false,
+      delete: false,
+    },
   },
   routes: routes,
   dialogs: ['createBoard', 'editBoard', 'viewTask'],

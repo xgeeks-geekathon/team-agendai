@@ -246,6 +246,7 @@ export const NavigationSidebar: React.FC<Props> = ({ open, onOpenRequest, onClos
             overflowX: 'hidden',
             transition: 'width ease-in-out 0.4s',
             border: 0,
+            borderRadius: 0,
           },
         }}
         sx={{

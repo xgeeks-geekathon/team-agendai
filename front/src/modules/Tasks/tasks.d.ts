@@ -8,9 +8,19 @@ declare namespace MT {
 
 declare namespace Tasks {
 
+  export interface TaskAssignee {
+    name: string;
+    avatar: string;
+  }
+
   interface TaskAttributes {
     title: string;
-    cost?: number;
+    status: string;
+    originalId: string;
+    description: string;
+    assignee: TaskAssignee;
+    estimation: number;
+    priority: number;
   
     createdAt: Date;
     updatedAt: Date;
@@ -30,12 +40,39 @@ declare namespace Tasks {
   }
 
   export interface ListParams {
-    search: string;
+    boardId: number;
   }
 
   export type GetListParams = MT.Query.GetListParams<ListParams>;
 
   export type CrudApi = MT.CamelToSnakeCase<Crud>;
 
-  export type TaskApi = MT.CamelToSnakeCase<Task>;
+  export type TaskApi = MT.CamelToSnakeCase<Omit<Task, 'priority'> & {
+    priority: MT.MaybeNull<number>;
+  }>;
+
+
+  export namespace Enhancement {
+    interface EnhancementAttributes {
+      title: string;
+      description: string;
+      estimation: number;
+      cost: number;
+    
+      createdAt: Date;
+      updatedAt: Date;
+    }
+  
+    export interface Enhancement extends EnhancementAttributes {
+      id: number;
+    }
+  
+    export interface Generate {
+      context: string;
+    }
+  
+    export type GenerateApi = MT.CamelToSnakeCase<Generate>;
+  
+    export type EnhancementApi = MT.CamelToSnakeCase<Enhancement>;
+  }
 };

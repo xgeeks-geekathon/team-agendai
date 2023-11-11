@@ -4,6 +4,7 @@ import { format, parse, startOfWeek, getDay } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 import { Box, Paper, Stack, Typography } from '@mui/material';
 
+import { DialogContext } from '@core/contexts';
 import { useDictionary } from '@core/hooks/useDictionary';
 import { BodyLoading } from '@core/components/layout/BodyLoading';
 
@@ -22,6 +23,7 @@ const localizer = dateFnsLocalizer({
 });
 
 export const Calendar = () => {
+  const { openDialog } = React.useContext(DialogContext);
   const dictionary = useDictionary();
 
   const { events, status } = useEvents({
@@ -36,7 +38,12 @@ export const Calendar = () => {
     resource: event.task,
   })), [events]);
 
-  
+  const openTask = React.useCallback((id: number) => {
+    openDialog('viewTask', {
+      taskId: id,
+    });
+  }, [openDialog]);
+
   if (status === 'pending') {
     return <BodyLoading height="100%" />;
   }
@@ -54,6 +61,7 @@ export const Calendar = () => {
           endAccessor="end"
           defaultView="work_week"
           views={['work_week']}
+          onSelectEvent={event => openTask(event.resource)}
         />
       </Paper>
     </Stack>
