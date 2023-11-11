@@ -20,6 +20,11 @@ export default defineConfig({
   plugins: [svgr(), react(), eslint()],
   server: {
     port: 3000,
+    host: true,
+  },
+  preview: {
+    port: 3001,
+    host: true,
   },
   test: {
     environment: 'jsdom',
