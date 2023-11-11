@@ -18,12 +18,12 @@ const EventSection: React.FC<Events.Event> = Event => {
 
 
   const onDelete = React.useCallback(async () => {
-    const userConfirmed = await asyncConfirmation({ title: dictionary.Events.edit.deleteConfirmation });
+    const userConfirmed = await asyncConfirmation({ title: dictionary.events.edit.deleteConfirmation });
     if (!userConfirmed) {
       return false;
     }
     return deleteEvent(Event.id).then(() => {
-      router.Events.go();
+      router.events.go();
     });
   }, [Event, deleteEvent, router, dictionary, asyncConfirmation]);
 
@@ -35,24 +35,24 @@ const EventSection: React.FC<Events.Event> = Event => {
 };
 
 interface Props {
-  EventId: number;
+  eventId: number;
 }
 
-export const ViewEvent: React.FC<Props> = ({ EventId }) => {
+export const ViewEvent: React.FC<Props> = ({ eventId }) => {
 
-  const { Event, status } = useEvent({ id: EventId });
+  const { event, status } = useEvent({ id: eventId });
 
   if (status === 'error') {
     return <MessageFeedbackView height="100%" />;
   }
 
-  if (status !== 'success' || !Event) {
+  if (status !== 'success' || !event) {
     return <BodyLoading height="100%"/>;
   }
 
   return (
     <React.Fragment>
-      <EventSection {...Event} />
+      <EventSection {...event} />
     </React.Fragment>
   );
 };

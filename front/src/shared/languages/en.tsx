@@ -166,6 +166,11 @@ export const dictionary = {
     view: {
       title: 'Event',
     },
+
+    edit: {
+      buttonDelete: 'Delete',
+      deleteConfirmation: 'Are you sure you want to delete this event?',
+    },
   },
 
   characters: {

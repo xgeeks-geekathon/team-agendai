@@ -1,14 +1,14 @@
 import { faker } from '@faker-js/faker';
 import { endOfDay, endOfWeek, startOfWeek } from 'date-fns';
 
-export const getFakeEvent = () => {
+export const getFakeEvent = (): Events.EventApi => {
   const startDate = faker.date.between({
     from: startOfWeek(new Date()),
     to: endOfWeek(new Date()),
   });
 
   return {
-    id: faker.string.uuid(),
+    id: faker.number.int(),
     title: faker.company.name(),
     description: faker.lorem.sentence(),
     start_date: startDate.toUTCString(),
@@ -25,6 +25,7 @@ export const getFakeEvent = () => {
     access_token: faker.string.uuid(),
     created_at: faker.date.anytime().toUTCString(),
     updated_at: faker.date.anytime().toUTCString(),
+    task: faker.number.int(),
   };
 };
 

@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 
 import { fakeRequest, request } from '@core/clients/baseClient';
-import { mapTaskData } from './tasksClient.formatter';
-import { getFakeTask, getFakeTasks } from './tasksClient.mocks';
+import { mapEnchancementData, mapTaskData } from './tasksClient.formatter';
+import { getFakeEnchancement, getFakeTask, getFakeTasks } from './tasksClient.mocks';
 
 const tasksApiBaseUrl = import.meta.env.VITE__API_URL;
 
@@ -71,6 +71,16 @@ const editTask = (data: Tasks.Edit): Promise<AxiosResponse<Tasks.Task>> => {
   }));
 };
 
+const bulkPriorityUpdate = (data: Record<number, number>): Promise<AxiosResponse<unknown>> => {
+  return request({
+    options: {
+      url: `${tasksApiBaseUrl}/tasks/bulk-priority/`,
+      method: 'PUT',
+      data,
+    },
+  });
+};
+
 const deleteTask = (params: { id: number | string }): Promise<AxiosResponse> => {
   return request({
     options: {
@@ -80,10 +90,46 @@ const deleteTask = (params: { id: number | string }): Promise<AxiosResponse> => 
   });
 };
 
+const getTaskEnhancement = (params: { id: number }): Promise<AxiosResponse<Tasks.Enhancement.Enhancement>> => {
+  return fakeRequest({
+    options: {
+      url: `${tasksApiBaseUrl}/tasks/${params.id}/enhancement`,
+      method: 'GET',
+    },
+    response: {
+      status: 200,
+      data: getFakeEnchancement(),
+    },
+  }).then((data: AxiosResponse<Tasks.Enhancement.EnhancementApi>) => ({
+    ...data,
+    data: mapEnchancementData(data.data),
+  }));
+};
+
+const generateTaskEnhancement = (params: { id: number }): Promise<AxiosResponse<Tasks.Enhancement.Enhancement>> => {
+  return fakeRequest({
+    options: {
+      url: `${tasksApiBaseUrl}/tasks/${params.id}/enhancement`,
+      method: 'POST',
+      timeout: 2000,
+    },
+    response: {
+      status: 200,
+      data: getFakeEnchancement(),
+    },
+  }).then((data: AxiosResponse<Tasks.Enhancement.EnhancementApi>) => ({
+    ...data,
+    data: mapEnchancementData(data.data),
+  }));
+};
+
 export const tasksClient = {
   getTask,
   getTasks,
   createTask,
   editTask,
   deleteTask,
+  getTaskEnhancement,
+  generateTaskEnhancement,
+  bulkPriorityUpdate,
 };

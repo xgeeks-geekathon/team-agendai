@@ -9,7 +9,7 @@ export const BoardListItemButton: React.FC<Boards.Board> = board => {
   const router = useRouter();
 
   return (
-    <ListItemButton component={Link} to={router.boards.view(board.id, 1).path}>
+    <ListItemButton component={Link} to={router.boards.view(board.id).path}>
       {board.title}
     </ListItemButton>
   );

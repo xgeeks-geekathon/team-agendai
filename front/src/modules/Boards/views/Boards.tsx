@@ -9,11 +9,11 @@ export const Boards = () => {
   const dictionary = useDictionary();
 
   return (
-    <Stack spacing={3}>
+    <Stack spacing={3} height="100%">
       <Box mb={2} textAlign="center">
         <Typography variant="h2">{dictionary.boards.list.title}</Typography>
       </Box>
-      <Box>
+      <Box height="100%">
         <BoardsGrid
           filters={{
             limit: 1000,

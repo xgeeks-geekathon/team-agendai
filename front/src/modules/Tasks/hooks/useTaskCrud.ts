@@ -74,9 +74,38 @@ export const useTaskCrud = () => {
     },
   });
 
+  const generateEnhancement = useMutation({
+    mutationKey: [cacheKeys.generateEnhancement],
+    mutationFn: (id: number) => tasksClient.generateTaskEnhancement({ id }),
+    onSuccess: (data, id) => {
+      queryClient.invalidateQueries({
+        queryKey: [cacheKeys.getEnhancement, {
+          id: data.data.id,
+        }],
+      });
+    },
+    onError: () => {
+      genericErrorFeedback();
+    },
+  });
+  const bulkUpdateTasks = useMutation({
+    mutationKey: [cacheKeys.bulkPriorityUpdate],
+    mutationFn: tasksClient.bulkPriorityUpdate,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [cacheKeys.getTasks],
+      });
+    },
+    onError: () => {
+      genericErrorFeedback();
+    },
+  });
+
   return {
     createTask: createTask.mutateAsync,
     editTask: editTask.mutateAsync,
     deleteTask: deleteTask.mutateAsync,
+    generateEnhancement,
+    bulkUpdateTasks,
   };
 };

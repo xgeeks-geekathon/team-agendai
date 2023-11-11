@@ -1,7 +1,7 @@
 declare namespace MT {
   export namespace Permission {
     export interface Permissions {
-      Events: MT.Permission.CrudPermission;
+      events: MT.Permission.CrudPermission;
     };
   };
 };
