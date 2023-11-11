@@ -15,6 +15,7 @@ import { Home } from './Home/Home';
 import { Profile } from './Users/Profile';
 import { Onboarding } from './Users/Onboarding';
 import { Boards } from './Board/Boards';
+import { Events } from './Events/Events';
 import { ViewBoard } from './Board/ViewBoard';
 
 export const Root = () => {
@@ -47,6 +48,7 @@ export const Root = () => {
           <Route path={router.onboarding.step().path} element={<Onboarding/>}/>
           <Route path={router.profile.path} element={<Profile/>}/>
           <Route path={router.boards.path} element={<Boards/>}/>
+          <Route path={router.events.path} element={<Events/>}/>
           <Route path={router.boards.view().path} element={<ViewBoard/>}/>
           <Route path="*" element={<Navigate to={router.home.path}/>}/>
         </Routes>

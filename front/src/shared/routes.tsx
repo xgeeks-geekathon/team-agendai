@@ -1,4 +1,4 @@
-import { Explore, LockOpen, Map, Person } from '@mui/icons-material';
+import { Explore, LockOpen, Map, Person, CalendarMonth } from '@mui/icons-material';
 
 import { Dictionary } from '@shared/dictionary';
 
@@ -30,6 +30,12 @@ export const routes = {
     path: '/boards',
     routes: {
       view: (boardId: string | number = ':boardId') => `/${boardId}`,
+    },
+  },
+  events: {
+    path: '/events',
+    routes: {
+      view: (eventId: string | number = ':eventId') => `/${eventId}`,
     },
   },
   tasks: {
@@ -64,6 +70,11 @@ export const navigation = (router: MT.Routing.RecursiveRoutes<typeof routes>, di
     requiresAuth: true,
   }, {
     divider: true,
+  }, {
+    icon: <CalendarMonth color="inherit"/>,
+    text: 'Events',
+    route: router.events.path,
+    requiresAuth: true,
   }, {
     icon: <Explore color="inherit"/>,
     text: dictionary.menu.board.list,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { BottomNavigation, BottomNavigationAction, Box, Collapse, Divider, Drawer, Hidden, IconButton, List, ListItemButtonProps, ListItemIcon, ListItemText, MenuItem, Paper, SwipeableDrawer, Tooltip } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Box, Collapse, Divider, Drawer, Hidden, IconButton, List, ListItemButtonProps, ListItemIcon, ListItemText, MenuItem, Paper, Tooltip } from '@mui/material';
 import { AutoStories, ChevronLeft, ChevronRight, ExpandLess, ExpandMore, HomeWork, Person } from '@mui/icons-material';
 
 import { PermissionContext } from '@core/contexts';
@@ -199,6 +199,7 @@ export const NavigationSidebar: React.FC<Props> = ({ open, onOpenRequest, onClos
               sx={{ backgroundColor: 'transparent', color: 'background.default' }}
             >
               <BottomNavigationAction component={NavLink} to={router.home.path} label="Home" icon={<HomeWork/>} />
+              <BottomNavigationAction component={NavLink} to={router.events.path} label="Events" icon={<HomeWork/>} />
               <BottomNavigationAction component={NavLink} to={router.boards.path} label="Boards" icon={<AutoStories/>} />
               <BottomNavigationAction component={NavLink} to={router.profile.path} label="Profile" icon={<Person/>} />
             </BottomNavigation>
