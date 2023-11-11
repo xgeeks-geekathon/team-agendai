@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "profile",
     "jira",
+    "main",
     "django_google_sso",  # Add django_google_sso
 ]
 
