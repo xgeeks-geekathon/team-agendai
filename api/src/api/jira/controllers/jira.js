@@ -10,7 +10,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 
 const controller = createCoreController('api::jira.jira', ({ strapi }) =>  ({
     async tickets(ctx) {
-        return ctx.body = 'hello world'
+        return ctx.body = 'Hello World'
     } }));
 
 module.exports = controller;
