@@ -1,0 +1,15 @@
+{
+  "short_name": "agendai",
+  "name": "Agendai",
+  "icons": [
+    {
+      "src": "applogo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF"
+}
