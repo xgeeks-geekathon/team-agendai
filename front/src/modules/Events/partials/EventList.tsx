@@ -18,22 +18,22 @@ export interface Props {
 
 export const EventsList: React.FC<Props> = ({ filters, renderItem, slotProps, showDivider = false }) => {
 
-  const { Events, status } = useEvents(filters);
+  const { events, status } = useEvents(filters);
 
-  if (status === 'pending' || !Events) {
+  if (status === 'pending' || !events) {
     return <BodyLoading height="100%"/>;
   }
 
   return (
     <React.Fragment>
-      {Events.length === 0 ? (
+      {events.length === 0 ? (
         <MessageFeedbackView height="100%" message="No Events" />
       ) : (
         <List {...slotProps?.list}>
-          {Events.map(Event => (
-            <React.Fragment key={Event.id}>
+          {events.map(event => (
+            <React.Fragment key={event.id}>
               {showDivider && (<Divider component="li"/>)}
-              <ListItem {...slotProps?.listItem}>{renderItem(Event)}</ListItem>
+              <ListItem {...slotProps?.listItem}>{renderItem(event)}</ListItem>
             </React.Fragment>
           ))}
         </List>

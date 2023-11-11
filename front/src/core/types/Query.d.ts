@@ -9,8 +9,8 @@ declare namespace MT {
     
     export type PaginatedResults<T> = {
       count: number;
-      next: CVT.MaybeNull<string>;
-      previous: CVT.MaybeNull<string>;
+      next: MT.MaybeNull<string>;
+      previous: MT.MaybeNull<string>;
       results: T[];
     };
   };

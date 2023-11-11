@@ -17,24 +17,21 @@ export interface Props {
 
 export const EventsGrid: React.FC<Props> = ({ filters, renderItem, slotProps }) => {
 
-  const { Events, status } = useEvents(filters);
+  const { events, status } = useEvents(filters);
 
-  console.log({
-    Events,
-  });
-  if (status === 'pending' || !Events) {
+  if (status === 'pending' || !events) {
     return <BodyLoading height="100%"/>;
   }
 
   return (
     <React.Fragment>
-      {Events.length === 0 ? (
-        <MessageFeedbackView height="100%" message="No Events" />
+      {events.length === 0 ? (
+        <MessageFeedbackView height="100%" message="No events" />
       ) : (
         <Grid container {...slotProps?.container}>
-          {Events.map(Event => (
-            <React.Fragment key={Event.id}>
-              <Grid item {...slotProps?.item}>{renderItem(Event)}</Grid>
+          {events.map(event => (
+            <React.Fragment key={event.id}>
+              <Grid item {...slotProps?.item}>{renderItem(event)}</Grid>
             </React.Fragment>
           ))}
         </Grid>

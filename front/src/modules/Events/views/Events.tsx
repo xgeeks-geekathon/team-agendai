@@ -11,21 +11,20 @@ export const Events = () => {
   return (
     <Stack spacing={3}>
       <Box mb={2} textAlign="center">
-        <Typography variant="h2">Events List</Typography>
+        <Typography variant="h2">{dictionary.events.list.title}</Typography>
       </Box>
       <Box>
         <EventsGrid
           filters={{
             limit: 1000,
           }}
-          renderItem={Event => <EventListItemCard {...Event} />}
+          renderItem={event => <EventListItemCard {...event} />}
           slotProps={{
             container: {
               spacing: 2,
             },
             item: {
               xs: 12,
-              sm: 12,
             },
           }}
         />

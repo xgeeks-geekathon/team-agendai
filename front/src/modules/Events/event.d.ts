@@ -37,9 +37,9 @@ declare namespace Events {
     search: string;
   }
 
-  export type GetListParams = CVT.Query.GetListParams<ListParams>;
+  export type GetListParams = MT.Query.GetListParams<ListParams>;
 
-  export type CrudApi = CVT.CamelToSnakeCase<Crud>;
+  export type CrudApi = MT.CamelToSnakeCase<Crud>;
 
   export type EventApi = MT.CamelToSnakeCase<Event>;
 };

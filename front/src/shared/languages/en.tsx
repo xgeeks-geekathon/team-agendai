@@ -154,6 +154,20 @@ export const dictionary = {
     },
   },
 
+  events: {
+    list: {
+      title: 'Events',
+    },
+
+    calendar: {
+      title: 'Calendar',
+    },
+
+    view: {
+      title: 'Event',
+    },
+  },
+
   characters: {
     list: {
       title: 'Contacts',
