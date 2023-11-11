@@ -18,7 +18,7 @@ export const Events = () => {
           filters={{
             limit: 1000,
           }}
-          renderItem={Event => <EventListItemCard {...Event} />}
+          renderItem={event => <EventListItemCard {...event} />}
           slotProps={{
             container: {
               spacing: 2,

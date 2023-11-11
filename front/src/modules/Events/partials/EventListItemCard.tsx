@@ -1,34 +1,43 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Card, CardActionArea, CardActions, Avatar, CardContent, Typography } from '@mui/material';
+import { Card, CardActionArea, Avatar, CardContent, Typography, Stack, Box } from '@mui/material';
 
-import { useRouter } from '@core/hooks/useRouter';
+import { DialogContext } from '@core/contexts';
 
 export const EventListItemCard: React.FC<Events.Event> = event => {
 
-  const router = useRouter();
+  const { openDialog } = React.useContext(DialogContext);
+
+  const openTask = React.useCallback(() => {    
+    openDialog('viewTask', {
+      taskId: event.task,
+    });
+  }, [openDialog, event]);
 
   return (
     <Card>
-      <CardActionArea component={Link} to={router.events.view(event.id).path} sx={{ height: '100%' }}>
+      <CardActionArea component={Box} width="100%" height="100%" onClick={openTask}>
         <CardContent>
-          <Typography gutterBottom variant="body2" color="secondary">
-            {format(event.startDate ,'dd/MM')} - {format(event.startDate ,'hh : mm')} - {format(event.endDate ,'hh : mm')}
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {event.title}
-          </Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <Box>
+              <Typography gutterBottom variant="body2" color="secondary">
+                {format(event.startDate ,'dd/MM')} - {format(event.startDate ,'hh:mm')} - {format(event.endDate ,'hh:mm')}
+              </Typography>
+              <Typography gutterBottom variant="h6" component="div">
+                {event.title}
+              </Typography>
+            </Box>
+            <Stack direction="row">
+              {event.attendees.map((attendee: any, key:any) => (
+                <Avatar sx={{ width: 24, height: 24 }} key={key} alt={attendee.name} src={attendee.avatar} />
+              ))}
+            </Stack>
+          </Stack>
           <Typography variant="body2" color="text.secondary">
             {event.description}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions disableSpacing>
-        {event.attendees.map((attendee: any, key:any) => (
-          <Avatar sx={{ width: 24, height: 24 }} key={key} alt={attendee.name} src={attendee.avatar} />
-        ))}
-      </CardActions>
     </Card>
   );
 };
