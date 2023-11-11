@@ -1,0 +1,11 @@
+*.pem
+.DS_Store
+.idea
+*.pyc
+
+*/__pycache__
+# BACKEND
+backend/__pycache__
+backend/env/
+backend/venv/
+backend/db.sqlite3
