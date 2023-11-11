@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jiras",
+  "info": {
+    "singularName": "jira",
+    "pluralName": "jiras",
+    "displayName": "jira"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "token": {
+      "type": "text"
+    }
+  }
+}

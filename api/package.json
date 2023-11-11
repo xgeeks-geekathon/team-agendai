@@ -9,12 +9,12 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "@strapi/plugin-cloud": "4.15.2",
     "@strapi/plugin-i18n": "4.15.2",
     "@strapi/plugin-users-permissions": "4.15.2",
     "@strapi/strapi": "4.15.2",
+    "axios": "^1.6.1",
     "better-sqlite3": "8.6.0",
     "googleapis": "^128.0.0",
     "openai": "^4.17.4",
