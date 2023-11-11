@@ -362,79 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAttendeeAttendee extends Schema.CollectionType {
-  collectionName: 'attendees';
-  info: {
-    singularName: 'attendee';
-    pluralName: 'attendees';
-    displayName: 'Attendee';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    email: Attribute.Email;
-    displayName: Attribute.String & Attribute.Required;
-    isUser: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::attendee.attendee',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::attendee.attendee',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEventEvent extends Schema.CollectionType {
-  collectionName: 'events';
-  info: {
-    singularName: 'event';
-    pluralName: 'events';
-    displayName: 'Event';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    startDate: Attribute.DateTime & Attribute.Required;
-    endDate: Attribute.DateTime & Attribute.Required;
-    description: Attribute.Text;
-    type: Attribute.String;
-    participants: Attribute.Relation<
-      'api::event.event',
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
-    htmlLink: Attribute.String & Attribute.Required;
-    location: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::event.event',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::event.event',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -755,6 +682,100 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAttendeeAttendee extends Schema.CollectionType {
+  collectionName: 'attendees';
+  info: {
+    singularName: 'attendee';
+    pluralName: 'attendees';
+    displayName: 'Attendee';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    email: Attribute.Email;
+    displayName: Attribute.String & Attribute.Required;
+    isUser: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::attendee.attendee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::attendee.attendee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    startDate: Attribute.DateTime & Attribute.Required;
+    endDate: Attribute.DateTime & Attribute.Required;
+    description: Attribute.Text;
+    type: Attribute.String;
+    participants: Attribute.Relation<
+      'api::event.event',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    htmlLink: Attribute.String & Attribute.Required;
+    location: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJiraJira extends Schema.CollectionType {
+  collectionName: 'jiras';
+  info: {
+    singularName: 'jira';
+    pluralName: 'jiras';
+    displayName: 'jira';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    token: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::jira.jira', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::jira.jira', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -765,14 +786,15 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::attendee.attendee': ApiAttendeeAttendee;
-      'api::event.event': ApiEventEvent;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::attendee.attendee': ApiAttendeeAttendee;
+      'api::event.event': ApiEventEvent;
+      'api::jira.jira': ApiJiraJira;
     }
   }
 }
