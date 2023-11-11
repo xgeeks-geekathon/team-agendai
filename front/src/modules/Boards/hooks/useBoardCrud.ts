@@ -13,9 +13,9 @@ export const useBoardCrud = () => {
   const { triggerFeedback, genericErrorFeedback } = React.useContext(FeedbackContext);
   const queryClient = useQueryClient();
 
-  const generateBoard = useMutation({
-    mutationFn: boardsClient.generateBoard,
+  const createBoard = useMutation({
     mutationKey: [cacheKeys.createBoard],
+    mutationFn: boardsClient.createBoard,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getBoards],
@@ -30,16 +30,16 @@ export const useBoardCrud = () => {
     },
   });
 
-  const deleteBoard = useMutation({
-    mutationFn: (id: number) => boardsClient.deleteBoard({ id }),
-    mutationKey: [cacheKeys.deleteBoard],
-    onSuccess: (data, id) => {
+  const editBoard = useMutation({
+    mutationKey: [cacheKeys.editBoard],
+    mutationFn: ({ id, ...data }: Boards.Edit) => boardsClient.editBoard({ id, ...data }),
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getBoards],
       });
-      queryClient.removeQueries({
+      queryClient.invalidateQueries({
         queryKey: [cacheKeys.getBoard, {
-          id,
+          id: data.data.id,
         }],
       });
       triggerFeedback({
@@ -52,30 +52,21 @@ export const useBoardCrud = () => {
     },
   });
 
-  const generateBoardCover = useMutation({
-    mutationFn: (id: number) => boardsClient.generateBoardCover({ id }),
-    mutationKey: [cacheKeys.generateBoardCover],
+  const deleteBoard = useMutation({
+    mutationKey: [cacheKeys.deleteBoard],
+    mutationFn: (id: number) => boardsClient.deleteBoard({ id }),
     onSuccess: (data, id) => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getBoards],
       });
-      queryClient.invalidateQueries({
+      queryClient.removeQueries({
         queryKey: [cacheKeys.getBoard, {
-          id,
+          id: data.data.id,
         }],
       });
-    },
-    onError: () => {
-      genericErrorFeedback();
-    },
-  });
-
-  const generateSectionCover = useMutation({
-    mutationFn: (id: number) => boardsClient.generateSectionCover({ id }),
-    mutationKey: [cacheKeys.generateSectionCover],
-    onSuccess: (data, id) => {
-      queryClient.invalidateQueries({
-        queryKey: [cacheKeys.getChapterSections],
+      triggerFeedback({
+        severity: 'success',
+        message: dictionary.feedback.changesSaved,
       });
     },
     onError: () => {
@@ -84,9 +75,8 @@ export const useBoardCrud = () => {
   });
 
   return {
-    generateBoard: generateBoard.mutateAsync,
+    createBoard: createBoard.mutateAsync,
+    editBoard: editBoard.mutateAsync,
     deleteBoard: deleteBoard.mutateAsync,
-    generateBoardCover: generateBoardCover.mutateAsync,
-    generateSectionCover: generateSectionCover.mutateAsync,
   };
 };

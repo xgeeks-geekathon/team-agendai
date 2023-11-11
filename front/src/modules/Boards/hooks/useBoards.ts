@@ -21,7 +21,7 @@ export const useBoards = (params: Boards.GetListParams = {}, options: Partial<Op
   return {
     status,
     error,
-    count: data?.meta.pagination.total || 0,
-    boards: data?.data || [],
+    count: data?.count || 0,
+    boards: data?.results || [],
   };
 };

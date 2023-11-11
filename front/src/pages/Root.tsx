@@ -14,6 +14,7 @@ import { GoogleCallback } from './Auth/GoogleCallback';
 import { Home } from './Home/Home';
 import { Profile } from './Users/Profile';
 import { Onboarding } from './Users/Onboarding';
+import { Boards } from './Board/Boards';
 import { Board } from './Board/Board';
 
 export const Root = () => {
@@ -45,7 +46,7 @@ export const Root = () => {
           <Route path={router.home.path} element={<Home/>}/>
           <Route path={router.onboarding.step().path} element={<Onboarding/>}/>
           <Route path={router.profile.path} element={<Profile/>}/>
-          <Route path={router.boards.path} element={<Board/>}/>
+          <Route path={router.boards.path} element={<Boards/>}/>
           <Route path={router.boards.view().path} element={<Board/>}/>
           <Route path="*" element={<Navigate to={router.home.path}/>}/>
         </Routes>

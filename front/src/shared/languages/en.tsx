@@ -247,25 +247,7 @@ export const dictionary = {
       fieldBirthday: 'Birthday',
     },
     board: {
-      fieldCharacters: 'Include your kids as the main characters',
-      fieldEnvironment: 'Select where',
-      fieldGlobalCharacters: 'Include other characters',
-      fieldCoreValues: 'Select what core value you wish to transmit',
-      customAttributesForm: {
-        addCustomButton: 'Add custom',
-        environment: {
-          title: 'Custom environment',
-          button: 'Select environment',
-        },
-        globalCharacters: {
-          title: 'Custom character',
-          button: 'Select character',
-        },
-        value: {
-          title: 'Custom value',
-          button: 'Select value',
-        },
-      },
+      fieldAccessToken: 'Access token',
     },
 
     validations: {

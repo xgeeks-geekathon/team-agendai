@@ -1,27 +1,17 @@
 declare namespace MT {
   export namespace Query {
     type BaseGetListParams = {
-      page: number;
-      pageSize: number;
+      limit: number;
+      offset: number;
     };
     
     export type GetListParams<T> = Partial<BaseGetListParams & T>;
     
-    export type Result<T> = {
-      meta: Record<string, any>;
-      data: T;
-    };
-    
     export type PaginatedResults<T> = {
-      meta: {
-        pagination: {
-          page: number,
-          pageSize: number,
-          pageCount: number,
-          total: number,
-        }
-      }
-      data: T[];
+      count: number;
+      next: CVT.MaybeNull<string>;
+      previous: CVT.MaybeNull<string>;
+      results: T[];
     };
   };
 }

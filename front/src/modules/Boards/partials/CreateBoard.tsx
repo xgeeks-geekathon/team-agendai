@@ -13,13 +13,13 @@ export const CreateBoard: React.FC<Props> = ({ onSuccess = noop }) => {
 
   const { dictionary } = React.useContext(LocalizationContext);
 
-  const { generateBoard } = useBoardCrud();
+  const { createBoard } = useBoardCrud();
 
-  const onSubmit = React.useCallback((data: Boards.Generate) => {
-    return generateBoard(data).then(data => {
+  const onSubmit = React.useCallback((data: Boards.Create) => {
+    return createBoard(data).then(data => {
       onSuccess(data.data);
     });
-  }, [generateBoard, onSuccess]);
+  }, [createBoard, onSuccess]);
 
   return (
     <BoardForm
