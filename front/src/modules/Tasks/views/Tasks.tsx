@@ -26,7 +26,7 @@ export const Tasks = () => {
       <Box>
         <TasksGrid
           filters={{
-            limit: 1000,
+            limit: 10000,
           }}
           renderItem={task => <TaskListItemCard {...task} onClick={openTask}/>}
           slotProps={{

@@ -16,7 +16,7 @@ export const Boards = () => {
       <Box height="100%">
         <BoardsGrid
           filters={{
-            limit: 1000,
+            limit: 10000,
           }}
           renderItem={board => <BoardListItemCard {...board} />}
           slotProps={{

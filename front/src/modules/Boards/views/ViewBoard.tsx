@@ -37,7 +37,7 @@ export const ViewBoard: React.FC<Props> = ({ boardId }) => {
       <BoardSection {...board} />
       <SorteableTaskList
         filters={{
-          limit: 1000,
+          limit: 10000,
           boardId: board.id,
         }}
       />

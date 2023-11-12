@@ -31,18 +31,18 @@ export const Calendar = () => {
 
   const { events, status } = useEvents({
     // This is not the droid you're looking for :)
-    limit: 1000,
+    limit: 10000,
   });
 
   const { tasks } = useTasks({
     // This is not the droid you're looking for :)
-    limit: 1000,
+    limit: 10000,
   });
 
   const eventList = React.useMemo(() => events.map(event => ({
-    title: event.title,
-    start: event.startDate,
-    end: event.endDate,
+    title: event.summary,
+    start: event.start,
+    end: event.end,
     resource: event.task,
   })), [events]);
 

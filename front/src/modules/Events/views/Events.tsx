@@ -16,7 +16,7 @@ export const Events = () => {
       <Box height="100%">
         <EventsGrid
           filters={{
-            limit: 1000,
+            limit: 10000,
           }}
           renderItem={event => <EventListItemCard {...event} />}
           slotProps={{
