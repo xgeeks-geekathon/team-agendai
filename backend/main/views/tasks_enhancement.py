@@ -48,8 +48,9 @@ Have in consideration the estimation, title and description of Jira CARDS and Go
 
 You ALWAYS return a JSON response to create those events in google calendar api format
 
-Just return list of object in JSON no notes.
+Just return list of object in JSON with key "events_to_create".
 """
+
 
 @require_http_methods(["GET"])
 @session_authentication()
@@ -134,7 +135,7 @@ def enhancement(request: Any, task_id: int) -> JsonResponse:
 
 @require_http_methods(["GET"])
 @session_authentication()
-def enhancement_calendar_events(request: Any, task_id: int=None) -> JsonResponse:
+def enhancement_calendar_events(request: Any, task_id: int = None) -> JsonResponse:
     """
     Enhance a given task.
 
@@ -174,15 +175,21 @@ def enhancement_calendar_events(request: Any, task_id: int=None) -> JsonResponse
             messages=messages
         )
 
-        results = json.loads(chat.choices[0].message.content).get("events_to_create") or []
-        creds = Credentials.from_authorized_user_file(f"/tmp/{request.user.googlessouser.id}.json", [])
-        service = build("calendar", "v3", credentials=creds)
-        calendar_id = service.calendarList().list().execute().get("items")[0]["id"]
+        try:
+            results = json.loads(chat.choices[0].message.content).get("events_to_create") or []
+            creds = Credentials.from_authorized_user_file(f"/tmp/{request.user.googlessouser.id}.json", [])
+            service = build("calendar", "v3", credentials=creds)
+            calendar_id = service.calendarList().list().execute().get("items")[0]["id"]
 
-        for result in results:
-            service.events().insert(calendarId=calendar_id, body=result).execute()
+            for result in results:
+                service.events().insert(calendarId=calendar_id, body=result).execute()
 
-        response_data = {"result": results}
+            response_data = {"messages": "Events created with success"}
+        except Exception:
+            response_data = {
+                "messages": "Unable to generate events on GCalendar",
+                "results": chat.choices[0].message.content
+            }
     except Tasks.DoesNotExist:
         response_data = {"message": f"Task '{task_id}' does not exist"}
         status = 404
