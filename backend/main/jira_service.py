@@ -31,6 +31,10 @@ class JiraSingleton:
                 )
             )
 
+        @classmethod
+        def get_client(cls):
+            return cls.client
+
     def __init__(self):
         """ Create singleton instance """
         # Check whether we already have an instance

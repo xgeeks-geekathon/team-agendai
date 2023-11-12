@@ -2,6 +2,8 @@ from functools import wraps
 
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
+from django.shortcuts import redirect
+from django.urls import reverse
 
 
 def session_authentication():
@@ -19,6 +21,9 @@ def session_authentication():
     def decorator(func):
         @wraps(func)
         def inner(request, *args, **kwargs):
+            if "sessionid" not in request.COOKIES:
+                return redirect(reverse("oauth-google-sso:oauth_start_login"))
+
             current_session = Session.objects.filter(session_key=request.COOKIES["sessionid"]).first()
 
             if current_session:
