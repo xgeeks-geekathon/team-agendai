@@ -8,11 +8,18 @@ declare namespace MT {
 
 declare namespace Events {
 
+  export interface EventAttendee {
+    id: number;
+    name: string;
+    email: string;
+    avatar: string;
+  };
+
   interface EventAttributes {
     title: string;
     accessToken: string;
     description: string;
-    attendees: Array;
+    attendees: EventAttendee[];
     createdAt: Date;
     startDate: Date;
     endDate: Date;

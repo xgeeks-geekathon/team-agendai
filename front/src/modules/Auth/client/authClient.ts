@@ -1,9 +1,8 @@
 import { AxiosResponse } from 'axios';
 
-import { fakeRequest, request } from '@core/clients/baseClient';
+import { request } from '@core/clients/baseClient';
 
 import { mapUserData } from './authClient.formatter';
-import { fakeMe } from './authClient.mocks';
 
 const authApiBaseUrl = `${import.meta.env.VITE__API_URL}`;
 
@@ -41,14 +40,10 @@ const ssoGoogleCallback = (params: any) => {
 };
 
 const getMe = (): Promise<AxiosResponse<Users.User>> => {
-  return fakeRequest({
+  return request({
     options: {
-      url: `${authApiBaseUrl}/users/me`,
+      url: `${authApiBaseUrl}/auth/me`,
       method: 'GET',
-    },
-    response: {
-      status: 200,
-      data: fakeMe,
     },
   }).then((data: AxiosResponse<Users.UserApi>) => ({
     ...data,
@@ -59,7 +54,7 @@ const getMe = (): Promise<AxiosResponse<Users.User>> => {
 const updateMe = (data: Partial<Auth.User>): Promise<AxiosResponse<Users.User>> => {
   return request({
     options: {
-      url: `${authApiBaseUrl}/users/me`,
+      url: `${authApiBaseUrl}/auth/me`,
       method: 'PUT',
       data,
     },
@@ -72,7 +67,7 @@ const updateMe = (data: Partial<Auth.User>): Promise<AxiosResponse<Users.User>> 
 const deleteMe = (): Promise<AxiosResponse<Users.User>> => {
   return request({
     options: {
-      url: `${authApiBaseUrl}/users/me`,
+      url: `${authApiBaseUrl}/auth/me`,
       method: 'DELETE',
     },
   });

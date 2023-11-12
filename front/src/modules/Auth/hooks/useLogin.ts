@@ -31,7 +31,7 @@ export const useLogin = () => {
   });
 
   const signInWithSSO = useCallback(async () => {
-    window.open(`${authApiBaseUrl}/connect/google`);
+    window.open(`${authApiBaseUrl}/oauth/google/login`, '_self');
   }, []);
 
   return {

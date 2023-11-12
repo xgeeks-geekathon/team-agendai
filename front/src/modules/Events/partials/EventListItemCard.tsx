@@ -28,8 +28,8 @@ export const EventListItemCard: React.FC<Events.Event> = event => {
               </Typography>
             </Box>
             <Stack direction="row">
-              {event.attendees.map((attendee: any, key:any) => (
-                <Avatar sx={{ width: 24, height: 24 }} key={key} alt={attendee.name} src={attendee.avatar} />
+              {event.attendees.map(attendee => (
+                <Avatar sx={{ width: 24, height: 24 }} key={attendee.id} alt={attendee.name} src={attendee.avatar} />
               ))}
             </Stack>
           </Stack>

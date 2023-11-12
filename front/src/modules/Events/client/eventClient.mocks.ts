@@ -17,8 +17,8 @@ export const getFakeEvent = (): Events.EventApi => {
       to: endOfDay(startDate),
     }).toUTCString(),
     attendees: Array.from({ length: 3 }).map(() => ({
-      id: faker.string.uuid(),
-      name: faker.name.firstName(),
+      id: faker.number.int(),
+      name: faker.person.fullName(),
       email: faker.internet.email(),
       avatar: faker.image.avatar(),
     })),
