@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay, setHours, setMinutes } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
-import { Avatar, Box, Paper, Stack, Tooltip, Typography, useTheme } from '@mui/material';
+import { Avatar, Box, Button, Paper, Stack, Tooltip, Typography, useTheme } from '@mui/material';
 
 import { DialogContext } from '@core/contexts';
 import { useDictionary } from '@core/hooks/useDictionary';
@@ -11,6 +11,7 @@ import { BodyLoading } from '@core/components/layout/BodyLoading';
 import { useTasks } from '@modules/Tasks/hooks/useTasks';
 
 import { useEvents } from '../hooks/useEvents';
+import { useEventCrud } from '../hooks/useEventCrud';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -28,6 +29,8 @@ export const Calendar = () => {
   const { openDialog } = React.useContext(DialogContext);
   const dictionary = useDictionary();
   const theme = useTheme();
+
+  const { populateEvents } = useEventCrud();
 
   const { events, status } = useEvents({
     // This is not the droid you're looking for :)
@@ -67,9 +70,12 @@ export const Calendar = () => {
           events={eventList}
           components={{
             toolbar: props => (
-              <Box textAlign="center" pb={2}>
+              <Stack direction="row" justifyContent="space-between" pb={2}>
                 <Typography variant="h5" component="span" color="secondary">{props.label}</Typography>
-              </Box>
+                <Box ml={3}>
+                  <Button color="secondary" size="small" onClick={() => populateEvents()}>Populate my life!</Button>
+                </Box>
+              </Stack>
             ),
             event: props => {
               const task = tasks.find(task => task.id);

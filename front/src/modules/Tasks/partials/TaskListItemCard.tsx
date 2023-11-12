@@ -3,13 +3,13 @@ import { formatDistanceToNow } from 'date-fns';
 import { Avatar, Box, Card, CardActionArea, CardContent, Stack, Tooltip, Typography } from '@mui/material';
 
 interface Props extends Tasks.Task {
-  onClick: (id: number) => void;
+  onClick: (id: number | string) => void;
 }
 
 export const TaskListItemCard: React.FC<Props> = ({ onClick, ...task }) => {
   return (
     <Card component={Box} width="100%" height="100%" sx={{ borderRadius: 0 }}>
-      <CardActionArea onClick={() => onClick(task.id)} sx={{ height: '100%' }}>
+      <CardActionArea onClick={() => onClick(task.issueId)} sx={{ height: '100%' }}>
         <CardContent>
           <Stack width="100%" direction="row" spacing={2} justifyContent="space-between" alignItems="center">
             <Stack direction="row" spacing={2} alignItems="center">

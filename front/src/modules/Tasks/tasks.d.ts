@@ -10,6 +10,7 @@ declare namespace Tasks {
   interface TaskAttributes {
     title: string;
     status: string;
+    issueId: string;
     originalId: string;
     description: string;
     assigneeName: string;

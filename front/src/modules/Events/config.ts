@@ -4,7 +4,5 @@ export const cacheKeys = {
   createEvent: 'createEvent',
   editEvent: 'editEvent',
   deleteEvent: 'deleteEvent',
-  generateEventCover: 'generateEventCover',
-  getChapterSections: 'getChapterSections',
-  generateSectionCover: 'generateSectionCover',
+  populateEvents: 'populateEvents',
 };

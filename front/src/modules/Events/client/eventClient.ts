@@ -71,6 +71,14 @@ const deleteEvent = (params: { id: number | string }): Promise<AxiosResponse> =>
     },
   });
 };
+const populateEvents = (): Promise<AxiosResponse> => {
+  return request({
+    options: {
+      url: `${EventsApiBaseUrl}/events/populate`,
+      method: 'POST',
+    },
+  });
+};
 
 export const eventsClient = {
   getEvent,
@@ -78,4 +86,5 @@ export const eventsClient = {
   createEvent,
   editEvent,
   deleteEvent,
+  populateEvents,
 };

@@ -12,7 +12,7 @@ export const Tasks = () => {
 
   const { openDialog } = React.useContext(DialogContext);
 
-  const openTask = React.useCallback((id: number) => {    
+  const openTask = React.useCallback((id: number | string) => {    
     openDialog('viewTask', {
       taskId: id,
     });

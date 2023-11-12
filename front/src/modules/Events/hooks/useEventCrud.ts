@@ -30,6 +30,23 @@ export const useEventCrud = () => {
     },
   });
 
+  const populateEvents = useMutation({
+    mutationKey: [cacheKeys.populateEvents],
+    mutationFn: eventsClient.populateEvents,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [cacheKeys.getEvents],
+      });
+      triggerFeedback({
+        severity: 'success',
+        message: dictionary.feedback.changesSaved,
+      });
+    },
+    onError: () => {
+      genericErrorFeedback();
+    },
+  });
+
   const editEvent = useMutation({
     mutationKey: [cacheKeys.editEvent],
     mutationFn: ({ id, ...data }: Events.Edit) => eventsClient.editEvent({ id, ...data }),
@@ -78,5 +95,6 @@ export const useEventCrud = () => {
     createEvent: createEvent.mutateAsync,
     editEvent: editEvent.mutateAsync,
     deleteEvent: deleteEvent.mutateAsync,
+    populateEvents: populateEvents.mutateAsync,
   };
 };
