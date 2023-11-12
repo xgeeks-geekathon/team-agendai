@@ -23,7 +23,7 @@ const getTasks = (params: Tasks.GetListParams): Promise<AxiosResponse<MT.Query.P
     options: {
       url: `${tasksApiBaseUrl}/tasks`,
       method: 'GET',
-      params,
+      // params,
     },
   }).then((data: AxiosResponse<MT.Query.PaginatedResults<Tasks.TaskApi>>) => {
     return {

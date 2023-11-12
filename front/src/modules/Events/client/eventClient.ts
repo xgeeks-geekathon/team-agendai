@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { isAfter } from 'date-fns';
 
 import { request } from '@core/clients/baseClient';
 import { mapEventData } from './eventClient.formatter';
@@ -28,7 +29,10 @@ const getEvents = (params: Events.GetListParams): Promise<AxiosResponse<MT.Query
     ...data,
     data: {
       ...data.data,
-      data: data.data.data.map(mapEventData),
+      data: data.data.data
+        .filter(event => event.start && event.end)
+        .filter(event => isAfter(new Date(event.start), new Date()))
+        .map(mapEventData),
     },
   }));
 };

@@ -8,4 +8,5 @@ export const mapEventData = (data: Events.EventApi): Events.Event => ({
   updated: new Date(data.updated),
   start: new Date(data.start),
   end: new Date(data.end),
+  attendees: [],
 });

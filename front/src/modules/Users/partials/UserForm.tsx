@@ -71,24 +71,6 @@ export const UserForm: React.FC<Props> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        {isFieldVisible('username') && (
-          <Grid item xs={12}>
-            <Controller
-              name="username"
-              control={control}
-              rules={{ required: dictionary.forms.validations.required }}
-              render={({ field, fieldState }) => (
-                <TextField
-                  {...field}
-                  label={dictionary.forms.user.username}
-                  error={!!fieldState.error}
-                  helperText={fieldState.error?.message}
-                  disabled={isFieldDisabled('username')}
-                />
-              )}
-            />
-          </Grid>
-        )}
         {isFieldVisible('email') && (
           <Grid item xs={12}>
             <Controller
