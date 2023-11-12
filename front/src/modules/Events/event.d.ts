@@ -17,7 +17,7 @@ declare namespace Events {
     startDate: Date;
     endDate: Date;
     updatedAt: Date;
-    task: number;
+    task: MT.MaybeNull<number>;
   }
 
   export interface Event extends EventAttributes {
