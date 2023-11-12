@@ -3,8 +3,8 @@
   "name": "Agendai",
   "icons": [
     {
-      "src": "applogo.png",
-      "type": "image/png",
+      "src": "applogo.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     }
   ],

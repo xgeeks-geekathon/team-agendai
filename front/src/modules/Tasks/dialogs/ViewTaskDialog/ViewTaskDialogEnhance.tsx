@@ -1,4 +1,5 @@
 import React from 'react';
+import Markdown from 'react-markdown';
 import { Avatar, Chip, Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { ClockIcon } from '@mui/x-date-pickers';
 import { ArrowForward, AutoFixHigh } from '@mui/icons-material';
@@ -34,7 +35,7 @@ export const ViewTaskDialogEnhance: React.FC<Props> = ({ task, onApprove }) => {
                 <Avatar src={task.typeIcon} alt={task.typeName} sx={{ width: 16, height: 16 }} variant="square" />
                 <Typography variant="body2" color="secondary" fontWeight={500}>{task.originalId}</Typography>
               </Stack>
-              <Chip icon={<ClockIcon/>} color="primary" size="small" label={`${task.estimation} hours`} />
+              <Chip icon={<ClockIcon/>} color="primary" size="small" label={`${enhancement.estimation} hours`} />
             </Stack>
             <Typography variant="h3" component="h1">
               {enhancement.title}
@@ -48,7 +49,7 @@ export const ViewTaskDialogEnhance: React.FC<Props> = ({ task, onApprove }) => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="body1">
-              <span dangerouslySetInnerHTML={{ __html: enhancement.description }} />
+              <Markdown>{enhancement.description}</Markdown>
             </Typography>
           </Grid>
           <Grid item xs={12}>

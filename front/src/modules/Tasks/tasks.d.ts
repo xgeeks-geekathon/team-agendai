@@ -69,6 +69,8 @@ declare namespace Tasks {
   
     export type GenerateApi = MT.CamelToSnakeCase<Generate>;
   
-    export type EnhancementApi = MT.CamelToSnakeCase<Enhancement>;
+    export type EnhancementApi = MT.CamelToSnakeCase<Enhancement> & {
+      value: string;
+    };
   }
 };

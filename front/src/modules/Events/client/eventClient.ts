@@ -31,7 +31,7 @@ const getEvents = (params: Events.GetListParams): Promise<AxiosResponse<MT.Query
       ...data.data,
       data: data.data.data
         .filter(event => event.start && event.end)
-        .filter(event => isAfter(new Date(event.start), new Date()))
+        .filter(event => isAfter(new Date(), new Date(event.start)))
         .map(mapEventData),
     },
   }));

@@ -83,7 +83,7 @@ const deleteTask = (params: { id: number | string }): Promise<AxiosResponse> => 
 const getTaskEnhancement = (params: { id: number | string }): Promise<AxiosResponse<Tasks.Enhancement.Enhancement>> => {
   return request({
     options: {
-      url: `${tasksApiBaseUrl}/tasks/${params.id}/enhancement`,
+      url: `${tasksApiBaseUrl}/tasks/${params.id}/enhancement/`,
       method: 'GET',
     },
   }).then((data: AxiosResponse<Tasks.Enhancement.EnhancementApi>) => ({
@@ -95,7 +95,7 @@ const getTaskEnhancement = (params: { id: number | string }): Promise<AxiosRespo
 const generateTaskEnhancement = (params: { id: number | string }): Promise<AxiosResponse<Tasks.Enhancement.Enhancement>> => {
   return request({
     options: {
-      url: `${tasksApiBaseUrl}/tasks/${params.id}/enhancement`,
+      url: `${tasksApiBaseUrl}/tasks/${params.id}/enhancement/`,
       method: 'POST',
     },
   }).then((data: AxiosResponse<Tasks.Enhancement.EnhancementApi>) => ({
