@@ -29,7 +29,7 @@ def list_all(request: Any) -> JsonResponse:
         for result in results:
             if Tasks.objects.filter(issue_id=result.id).exists():
                 existing_objects.append(result.id)
-                continue
+                # continue
 
             fields = {"user_id": request.user.id}
             for model_field, field in TASKS_FIELDS_MAPPING.items():

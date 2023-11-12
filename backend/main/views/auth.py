@@ -27,11 +27,11 @@ def me(request: Any) -> JsonResponse:
 
 @require_http_methods(["GET"])
 @session_authentication()
-def register(request: Any) -> JsonResponse:
+def register(__: Any) -> JsonResponse:
     """
-    Register user
+    Dummy endpoint to redirect to FE
 
-    :param Any request: django request object
+    :param Any __: django request object
     :return:
     """
 

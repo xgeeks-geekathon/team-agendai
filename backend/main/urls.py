@@ -40,7 +40,7 @@ tasks_urls = (
 
 tasks_enhancement_urls = (
     [
-        path("", tasks_enhancement.list_all, name="list"),
+        path("<int:task_id>/", tasks_enhancement.list_all, name="list"),
     ],
     "tasks-enhancement"
 )

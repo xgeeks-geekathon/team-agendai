@@ -50,9 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "main",
     "django_google_sso",  # Add django_google_sso
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,7 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Handle exception for missing mandatory variable env
 GOOGLE_SSO_CLIENT_ID = os.getenv("GOOGLE_SSO_CLIENT_ID")
 GOOGLE_SSO_CLIENT_SECRET = os.getenv("GOOGLE_SSO_CLIENT_SECRET")
-GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL", "auth-register")
+GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL", "auth-register-redirect")
 FRONT_AUTH_REDIRECT = os.getenv("FRONT_AUTH_REDIRECT", "http://localhost:3000/")
 
 JIRA_TOKEN = os.getenv("JIRA_TOKEN")
@@ -158,3 +160,22 @@ GOOGLE_SSO_SCOPES = [
 ]
 SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", False)
 OPENAPI_KEY = os.getenv("OPENAPI_KEY")
+
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "Token",
+    "X-Request-ID",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
