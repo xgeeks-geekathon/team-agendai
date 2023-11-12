@@ -22,11 +22,13 @@
     border-color: #090F1F;
 }
 
-.rbc-day-slot .rbc-event,
-.rbc-day-slot .rbc-background-event {
-    border-color: #C14953;
+.rbc-header {
+    color: #D6D6B1;
 }
-.rbc-event,
-.rbc-day-slot .rbc-background-event {
-    background-color: #C14953;
+.rbc-label {
+    font-weight: 500;
+}
+
+.rbc-allday-cell {
+    display: none !important;
 }

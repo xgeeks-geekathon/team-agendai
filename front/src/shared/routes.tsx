@@ -1,4 +1,4 @@
-import { Explore, LockOpen, Map, Person, CalendarMonth } from '@mui/icons-material';
+import { LockOpen, Map, Person, CalendarMonth, Grading } from '@mui/icons-material';
 
 import { Dictionary } from '@shared/dictionary';
 
@@ -76,7 +76,7 @@ export const navigation = (router: MT.Routing.RecursiveRoutes<typeof routes>, di
     route: router.events.path,
     requiresAuth: true,
   }, {
-    icon: <Explore color="inherit"/>,
+    icon: <Grading color="inherit"/>,
     text: dictionary.menu.board.list,
     route: router.boards.path,
     requiresAuth: true,

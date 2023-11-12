@@ -1,6 +1,6 @@
 import React from 'react';
 import update from 'immutability-helper';
-import { List } from '@mui/material';
+import { Box, List, Paper } from '@mui/material';
 
 import { useDictionary } from '@core/hooks/useDictionary';
 
@@ -47,16 +47,24 @@ export const SortableContainer: React.FC<Props> = ({ tasks }) => {
 
   return (
     <React.Fragment>
-      {isDirty && (
-        <LoadingButton loading={bulkUpdateTasks.isPending} variant="contained" onClick={onBulkUpdate}>
-          {dictionary.forms.buttonEdit}
-        </LoadingButton>
-      )}
-      <List>
-        {list.map(task => (
-          <SorteableTaskItem key={task.id} task={task} moveItem={moveItem} />
-        ))}
-      </List>
+      <Box component={Paper} p={2}>
+        <Box display="flex" justifyContent="flex-end" mb={1} borderBottom={1} pb={1} borderColor="background.default">
+          <LoadingButton
+            loading={bulkUpdateTasks.isPending}
+            size="small"
+            variant="contained"
+            onClick={onBulkUpdate}
+            disabled={!isDirty}
+          >
+            {dictionary.forms.buttonEdit}
+          </LoadingButton>
+        </Box>
+        <List disablePadding>
+          {list.map(task => (
+            <SorteableTaskItem key={task.id} task={task} moveItem={moveItem} />
+          ))}
+        </List>
+      </Box>
     </React.Fragment>
   );
 };

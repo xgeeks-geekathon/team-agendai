@@ -56,6 +56,7 @@ export const SorteableTaskItem: React.FC<Props> = ({ task, moveItem }) => {
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       disableGutters
+      disablePadding
     >
       <TaskListItemCard {...task} onClick={openTask} />
     </ListItem>

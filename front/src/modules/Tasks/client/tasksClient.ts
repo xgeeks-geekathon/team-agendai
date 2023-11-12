@@ -36,13 +36,17 @@ const getTasks = (params: Tasks.GetListParams): Promise<AxiosResponse<MT.Query.P
         results: getFakeTasks(),
       },
     },
-  }).then((data: AxiosResponse<MT.Query.PaginatedResults<Tasks.TaskApi>>) => ({
-    ...data,
-    data: {
-      ...data.data,
-      results: data.data.results.map(mapTaskData),
-    },
-  }));
+  }).then((data: AxiosResponse<MT.Query.PaginatedResults<Tasks.TaskApi>>) => {
+    data.data.results.map(console.log);
+    console.log(data.data.results);
+    return {
+      ...data,
+      data: {
+        ...data.data,
+        results: data.data.results.map(mapTaskData),
+      },
+    };
+  });
 };
 
 const createTask = (data: Tasks.Create): Promise<AxiosResponse<Tasks.Task>> => {

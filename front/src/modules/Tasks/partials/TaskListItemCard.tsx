@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { Box, Card, CardActionArea, CardContent, Typography } from '@mui/material';
+import { Avatar, Box, Card, CardActionArea, CardContent, Stack, Tooltip, Typography } from '@mui/material';
 
 interface Props extends Tasks.Task {
   onClick: (id: number) => void;
@@ -8,13 +8,28 @@ interface Props extends Tasks.Task {
 
 export const TaskListItemCard: React.FC<Props> = ({ onClick, ...task }) => {
   return (
-    <Card component={Box} width="100%" height="100%">
+    <Card component={Box} width="100%" height="100%" sx={{ borderRadius: 0 }}>
       <CardActionArea onClick={() => onClick(task.id)} sx={{ height: '100%' }}>
         <CardContent>
-          <Typography gutterBottom variant="body2" color="secondary">{formatDistanceToNow(task.createdAt, { addSuffix: true })}</Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {task.title}
-          </Typography>
+          <Stack width="100%" direction="row" spacing={2} justifyContent="space-between" alignItems="center">
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Avatar src={task.type.icon} alt={task.type.name} sx={{ width: 16, height: 16 }} variant="square" />
+                <Typography variant="body2" color="secondary" fontWeight={500}>{task.originalId}</Typography>
+              </Stack>
+              <Typography variant="h6" component="div">
+                {task.title}
+              </Typography>
+            </Stack>
+            <Stack ml="100%" direction="row" spacing={1} alignItems="center">
+              <Typography variant="body2" color="secondary">
+                {formatDistanceToNow(task.createdAt, { addSuffix: true })}
+              </Typography>
+              <Tooltip title={task.assignee.name}>
+                <Avatar src={task.assignee.avatar} alt={task.assignee.name} sx={{ width: 24, height: 24 }} />
+              </Tooltip>
+            </Stack>
+          </Stack>
         </CardContent>
       </CardActionArea>
     </Card>

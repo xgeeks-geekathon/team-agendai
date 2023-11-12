@@ -65,7 +65,7 @@ export const request: AbstractRequest = async ({ options, authenticate = true, m
   });
 };
 
-export const fakeRequest: FakeAbstractRequest = async ({ response: { status = 200, timeout: timeoutMs = 600, data = {} } }): Promise<AxiosResponse> => {
+export const fakeRequest: FakeAbstractRequest = async ({ response: { status = 200, timeout: timeoutMs = 0, data = {} } }): Promise<AxiosResponse> => {
   await timeout(timeoutMs);
 
   if (status === 200) {

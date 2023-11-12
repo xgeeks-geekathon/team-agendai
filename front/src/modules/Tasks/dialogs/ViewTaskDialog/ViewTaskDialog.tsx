@@ -1,19 +1,17 @@
 import React from 'react';
-import { noop } from 'lodash';
 import {
-  // Box,
+  Dialog,
   DialogContent,
   Grid,
   IconButton,
-  SwipeableDrawer,
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-// import { DialogContext } from '@core/contexts';
-// import { useDictionary } from '@core/hooks/useDictionary';
+import { DialogContext } from '@core/contexts';
 import { BodyLoading } from '@core/components/layout/BodyLoading';
 
 import { useTask } from '../../hooks/useTask';
+import { useTaskCrud } from '../../hooks/useTaskCrud';
 import { ViewTaskDialogMain } from './ViewTaskDialogMain';
 import { ViewTaskDialogEnhance } from './ViewTaskDialogEnhance';
 
@@ -27,8 +25,9 @@ type Props = {
 
 export const ViewTaskDialog: React.FC<Props> = ({ open, onClose, data }) => {
 
-  // const { asyncConfirmation } = React.useContext(DialogContext);
-  // const dictionary = useDictionary();
+  const { asyncConfirmation } = React.useContext(DialogContext);
+
+  const { editTask } = useTaskCrud();
 
   const { task, status } = useTask({
     id: data?.taskId as number,
@@ -36,16 +35,28 @@ export const ViewTaskDialog: React.FC<Props> = ({ open, onClose, data }) => {
     enabled: !!data?.taskId,
   });
 
-  // const onEditRequest = React.useCallback(async (data: Tasks.Crud) => {
-  // }, [dictionary]);
+  const onEditRequest = React.useCallback(async (enhancement: Tasks.Enhancement.Enhancement) => {
+    const confirmed = await asyncConfirmation({
+      title: 'Attention!',
+      content: 'You incur the risk of making this task awesome! Proceed at your own risk.',
+      confirmLabel: 'Yes, I like it awesome!',
+      cancelLabel: 'No, I like it rought.',
+    });
+
+    if (confirmed && !!task) {
+      return editTask({
+        ...task,
+        title: enhancement.title,
+        description: enhancement.description,
+        estimation: enhancement.estimation,
+      });
+    }
+  }, [asyncConfirmation, task, editTask]);
 
   return (
-    <SwipeableDrawer
-      disableSwipeToOpen
+    <Dialog
       keepMounted={false}
-      anchor="bottom"
       open={open}
-      onOpen={noop}
       onClose={onClose}
       PaperProps={{
         sx: theme => ({
@@ -74,14 +85,14 @@ export const ViewTaskDialog: React.FC<Props> = ({ open, onClose, data }) => {
         <Grid container spacing={2}>
           <Grid item md={8}>
             <DialogContent>
-              <ViewTaskDialogMain task={task} />
+              <ViewTaskDialogEnhance task={task} onApprove={onEditRequest} />
             </DialogContent>
           </Grid>
           <Grid item md={4}>
-            <ViewTaskDialogEnhance taskId={task.id} />
+            <ViewTaskDialogMain task={task} />
           </Grid>
         </Grid>
       )}
-    </SwipeableDrawer>
+    </Dialog>
   );
 };

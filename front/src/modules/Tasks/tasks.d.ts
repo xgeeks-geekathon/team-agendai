@@ -13,8 +13,14 @@ declare namespace Tasks {
     avatar: string;
   }
 
+  export interface TaskType {
+    name: string;
+    icon: string;
+  }
+
   interface TaskAttributes {
     title: string;
+    type: TaskType;
     status: string;
     originalId: string;
     description: string;
@@ -30,7 +36,7 @@ declare namespace Tasks {
     id: number;
   }
 
-  export interface Crud extends Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'title'> {
+  export interface Crud extends Omit<Task, 'id' | 'createdAt' | 'updatedAt'> {
   }
 
   export interface Create extends Crud {}
@@ -57,7 +63,6 @@ declare namespace Tasks {
       title: string;
       description: string;
       estimation: number;
-      cost: number;
     
       createdAt: Date;
       updatedAt: Date;
