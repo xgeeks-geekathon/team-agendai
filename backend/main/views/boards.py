@@ -28,7 +28,7 @@ def list_all(request: Any) -> JsonResponse:
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 
-    return JsonResponse(data={"message": "Im fine thanks"}, status=200)
+    return JsonResponse(data=response_data, status=status)
 
 
 @require_http_methods(["POST"])
