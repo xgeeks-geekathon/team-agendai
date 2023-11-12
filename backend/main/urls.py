@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from main.views import auth, boards, events, tasks, tasks_enhancement
+from main.views import auth, boards, events, google, tasks, tasks_enhancement
 
 boards_urls = (
     [
@@ -45,10 +45,20 @@ tasks__enhancement_urls = (
     "tasks-enhancement"
 )
 
+oauth_urls = (
+    [
+
+        path("login/", google.start_login, name="oauth_start_login"),
+        path("callback/", google.callback, name="oauth_callback"),
+    ],
+    "django_google_sso"
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("oauth/google/", include("django_google_sso.urls", namespace="oauth-google-sso")),
-    path("me/",auth.me, name="auth-me"),
+    path("oauth/google/", include(oauth_urls, namespace="oauth-google-sso")),
+    path("auth/me/", auth.me, name="auth-me"),
+    path("auth/register/", auth.register, name="auth-register"),
     path("boards/", include(boards_urls, namespace="boards")),
     path("events/", include(events_urls, namespace="events")),
     path("tasks/", include(tasks_urls, namespace="tasks")),

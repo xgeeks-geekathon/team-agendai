@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", True)
 
 ALLOWED_HOSTS = [
     "34.211.69.61",
@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Handle exception for missing mandatory variable env
 GOOGLE_SSO_CLIENT_ID = os.getenv("GOOGLE_SSO_CLIENT_ID")
 GOOGLE_SSO_CLIENT_SECRET = os.getenv("GOOGLE_SSO_CLIENT_SECRET")
-GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL", "auth-me")
+GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL", "auth-register")
 
 JIRA_TOKEN = os.getenv("JIRA_TOKEN")
 JIRA_URL = os.getenv("JIRA_URL")
@@ -148,4 +148,11 @@ JIRA_AUTHENTICATION_EMAIL = os.getenv("JIRA_AUTHENTICATION_EMAIL")
 JIRA_AUTHENTICATION_ACCESS_TOKEN = os.getenv("JIRA_AUTHENTICATION_ACCESS_TOKEN")
 
 GOOGLE_SSO_ALLOWABLE_DOMAINS = ["gmail.com"]
-SECURE_SSL_REDIRECT = True
+GOOGLE_SSO_SAVE_ACCESS_TOKEN = True
+GOOGLE_SSO_SCOPES = [
+    "openid",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/calendar.events",
+]
+SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", False)
