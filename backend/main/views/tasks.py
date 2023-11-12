@@ -27,26 +27,32 @@ def list_all(request: Any) -> JsonResponse:
         serialized_objects = []
         existing_objects = []
         for result in results:
-            if Tasks.objects.filter(issue_id=result.id).exists():
-                existing_objects.append(result.id)
-                # continue
+            _task = Tasks.objects.filter(issue_id=result.id)
 
             fields = {"user_id": request.user.id}
             for model_field, field in TASKS_FIELDS_MAPPING.items():
                 fields[model_field] = explore_nested_object(result, field)
 
-            serialized_objects.append(fields)
-            objects_to_create.append(Tasks(**fields))
+            if not _task.exists():
+                serialized_objects.append(fields)
+                objects_to_create.append(Tasks(**fields))
+            else:
+                _task.update(**fields)
+                existing_objects.append(_task.first())
 
-        Tasks.objects.bulk_create(objects_to_create)
+
+        if existing_objects:
+            Tasks.objects.bulk_update(existing_objects, list(TASKS_FIELDS_MAPPING.keys()))
+
+        if objects_to_create:
+            Tasks.objects.bulk_create(objects_to_create)
+
         response_data = {
             "message": "Tasks fetched with success",
-            "data": serialized_objects + [
-                model_to_dict(_task) for _task in Tasks.objects.filter(issue_id__in=existing_objects)
-            ]
+            "data": serialized_objects + [model_to_dict(_task) for _task in existing_objects]
         }
         status = 201
-    except (AttributeError, Exception):
+    except (AttributeError, Exception) as error:
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

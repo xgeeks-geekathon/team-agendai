@@ -5,14 +5,14 @@ TASKS_FIELDS_MAPPING = {
     "assignee_name": "assignee.issue.fields.assignee.displayName",
     "assignee_avatar": "assignee.issue.fields.assignee.avatarUrls['48x48']",
     "priority": "priority",
-    "original_id": "issue.key",
-    "title": "issue.fields.summary",
-    "description": "issue.fields.description",
-    "status": "issue.fields.status.name",
+    "original_id": "key",
+    "title": "fields.summary",
+    "description": "fields.description",
+    "status": "fields.status.name",
     "issue_id": "id",
-    "estimation": "issue.fields.timeestimate",
-    "created_at": "issue.fields.created",
-    "updated_at": "issue.fields.updated"
+    "estimation": "fields.timeestimate",
+    "created_at": "fields.created",
+    "updated_at": "fields.updated"
 }
 
 
