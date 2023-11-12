@@ -1,16 +1,30 @@
 # team-agendai
-
-Hello
-
 # Index
+- [Frontend](#frontend)
+  - [How to run](#how-to-run-front)
 - [Backend](#backend)
   - [How to run](#how-to-run)
+
+
+## <a id="frontend"></a>Frontend
+
+App built in React this will connect to our backend
+
+### <a id="how-to-run"></a>How to run
+
+In order to run this is necessary to provide some credentials that need to be set on a `.env` file on frontend directory
+
+```
+VITE__PROJECT_KEY=agendai
+VITE__REACT_APP_BASE_URL=http://localhost:3000/
+VITE__API_URL=http://localhost:1337
+```
 
 ## <a id="backend"></a>Backend
 
 Simple API built with Django, this will work with Google OAuth and Jira API, so it's necessary in to set both of them in order to run the project locally
 
-### <a id="how-to-run"></a>How to run
+### <a id="how-to-run-front"></a>How to run
 
 In order to run this is necessary to provide some credentials that need to be set on a `.env` file on backend directory
 
