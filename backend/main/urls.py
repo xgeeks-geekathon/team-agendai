@@ -29,6 +29,7 @@ boards_urls = (
 events_urls = (
     [
         path("", events.list_all, name="list"),
+        path("populate/", tasks_enhancement.enhancement_calendar_events, name="events-enhancement"),
     ],
     "events"
 )
