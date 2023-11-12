@@ -1,4 +1,3 @@
-import json
 from typing import Any
 
 import openai
@@ -7,7 +6,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
 from main.decorators import session_authentication
-from main.models import Tasks
+from main.models import Tasks, TaskEnhancement
+from main.utils import model_to_dict
 
 CONTEXT_MESSAGE = """
 You are an expert Product Owner.
@@ -34,13 +34,39 @@ You ALWAYS return a JSON response with the following format:
 };
 """
 
+
 @require_http_methods(["GET"])
 @session_authentication()
-def list_all(request: Any, task_id:int) -> JsonResponse:
+def list_all(__: Any, task_id: int = None) -> JsonResponse:
     """
-    WIP
+    List or details a task enhanced
+
+    :param Any __: django request object
+    :param int task_id: task id (issue_id)
+    :return:
+    """
+
+    status = 200
+    try:
+        if task_id:
+            response_data = {model_to_dict(TaskEnhancement.objects.get(task__issue_id=task_id))}
+        else:
+            response_data = {"result": [model_to_dict(item) for item in TaskEnhancement.objects.all()]}
+    except (AttributeError, Exception):
+        response_data = {"message": "Something went wrong during the process"}
+        status = 400
+
+    return JsonResponse(data=response_data, status=status)
+
+
+@require_http_methods(["GET"])
+@session_authentication()
+def enhancement(request: Any, task_id: int) -> JsonResponse:
+    """
+    Enhance a given task.
 
     :param Any request: django request object
+    :param int task_id: task id (issue_id)
     :return:
     """
 
@@ -67,12 +93,20 @@ def list_all(request: Any, task_id:int) -> JsonResponse:
             messages=messages
         )
 
-        # TaskEnhancement
-        response_data = {"result": chat.choices[0].message.content}
+        result = chat.choices[0].message.content
+        task_enhanced, created = TaskEnhancement.objects.get_or_create(
+            user=request.user,
+            task=task,
+        )
+
+        task_enhanced.value = result
+        task_enhanced.save()
+
+        response_data = {"result": model_to_dict(task_enhanced)}
     except Tasks.DoesNotExist:
         response_data = {"message": f"Task '{task_id}' does not exist"}
         status = 404
-    except (AttributeError, Exception) as error:
+    except (AttributeError, Exception):
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

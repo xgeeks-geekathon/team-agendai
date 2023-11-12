@@ -37,26 +37,31 @@ def list_all(request: Any) -> JsonResponse:
         for calendar in available_calenders:
             results = service.events().list(calendarId=calendar["id"]).execute()
             for result in (results.get("items") or []):
-                if Events.objects.filter(calendar_id=result["id"]).exists():
-                    existing_objects.append(result["id"])
-                    continue
+                _event = Events.objects.filter(calendar_id=result["id"])
 
                 fields = {"user_id": request.user.id}
                 for model_field, field in EVENTS_FIELDS_MAPPING.items():
                     fields[model_field] = explore_nested_object(result, field)
 
-                serialized_objects.append(fields)
-                objects_to_create.append(Events(**fields))
+                if not _event.exists():
+                    serialized_objects.append(fields)
+                    objects_to_create.append(Events(**fields))
+                else:
+                    _event.update(**fields)
+                    existing_objects.append(_event.first())
 
-        Events.objects.bulk_create(objects_to_create)
+        if existing_objects:
+            Events.objects.bulk_update(existing_objects, list(EVENTS_FIELDS_MAPPING.keys()))
+
+        if objects_to_create:
+            Events.objects.bulk_create(objects_to_create)
+
         response_data = {
             "message": "Events fetched with success",
-            "data": serialized_objects + [
-                model_to_dict(item) for item in Events.objects.filter(calendar_id__in=existing_objects)
-            ]
+            "data": serialized_objects + [model_to_dict(item) for item in existing_objects]
         }
         status = 201
-    except (AttributeError, Exception):
+    except (AttributeError, Exception) as error:
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

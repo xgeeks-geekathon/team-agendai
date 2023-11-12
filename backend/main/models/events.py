@@ -10,6 +10,8 @@ EVENTS_FIELDS_MAPPING = {
     "description": "description",
     "start": "start.date",
     "end": "start.date",
+    "attendees": "attendees",
+    "organizer": "organizer",
 }
 
 
@@ -24,3 +26,5 @@ class Events(models.Model):
     description = models.TextField(null=True, blank=True)
     start = models.CharField(max_length=32, null=True, blank=True)
     end = models.CharField(max_length=32, null=True, blank=True)
+    attendees = models.JSONField(null=True, blank=True, default=None)
+    organizer = models.JSONField(null=True, blank=True, default=None)

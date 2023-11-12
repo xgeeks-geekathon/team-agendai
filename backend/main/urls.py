@@ -34,13 +34,15 @@ events_urls = (
 tasks_urls = (
     [
         path("", tasks.list_all, name="list"),
+        path("<int:task_id>/enhancement/", tasks_enhancement.enhancement, name="tasks-enhancement"),
     ],
     "tasks"
 )
 
 tasks_enhancement_urls = (
     [
-        path("<int:task_id>/", tasks_enhancement.list_all, name="list"),
+        path("", tasks_enhancement.list_all, name="list"),
+        path("<int:task_id>/", tasks_enhancement.list_all, name="details"),
     ],
     "tasks-enhancement"
 )
