@@ -103,7 +103,7 @@ def enhancement(request: Any, task_id: int) -> JsonResponse:
             },
             {
                 "role": "user",
-                "content": task.description
+                "content": task.description or ""
             },
         ]
 
