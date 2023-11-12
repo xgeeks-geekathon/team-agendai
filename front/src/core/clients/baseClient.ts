@@ -21,19 +21,14 @@ export type FakeAbstractRequest = (props: {
   response: any;
 }) => Promise<AxiosResponse>;
 
-const localStorageBearerKey = `${import.meta.env.VITE__PROJECT_KEY}-bearer`;
 const localStorageLanguageKey = `${import.meta.env.VITE__PROJECT_KEY}-bearer`;
 
 export const attachOptions = async (options: RequestOptions, authenticate: boolean): Promise<RequestOptions> => {
-  let token: MT.MaybeNull<string> = null;
-
-  if (authenticate) {
-    token = localStorage.getItem(localStorageBearerKey);
-  }
   const selectedLanguage = typeof localStorage !== 'undefined' ? localStorage.getItem(localStorageLanguageKey) || 'en' : 'en';
 
   return {
     ...options,
+    withCredentials: authenticate,
     params: {
       ...options.params,
     },
@@ -42,9 +37,9 @@ export const attachOptions = async (options: RequestOptions, authenticate: boole
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'Accept-Language': selectedLanguage,
-      ...(authenticate && token && {
-        'Authorization': 'Bearer ' + token,
-      }),
+      // ...(authenticate && token && {
+      //   'Authorization': 'Bearer ' + token,
+      // }),
       ...options.headers,
     },
   };
@@ -55,14 +50,7 @@ export const request: AbstractRequest = async ({ options, authenticate = true, m
     ...options,
   }, authenticate);
 
-  return axiosRequest(optionsWithHeader).then((data: AxiosResponse<any, any>) => {
-    if (data.data && data.status && data.status === 200) {
-      if (data.data.jwt) {
-        localStorage.setItem(localStorageBearerKey, data.data.jwt);
-      }
-    }
-    return data;
-  });
+  return axiosRequest(optionsWithHeader);
 };
 
 export const fakeRequest: FakeAbstractRequest = async ({ response: { status = 200, timeout: timeoutMs = 0, data = {} } }): Promise<AxiosResponse> => {

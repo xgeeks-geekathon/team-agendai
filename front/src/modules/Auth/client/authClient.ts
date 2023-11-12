@@ -42,7 +42,7 @@ const ssoGoogleCallback = (params: any) => {
 const getMe = (): Promise<AxiosResponse<Users.User>> => {
   return request({
     options: {
-      url: `${authApiBaseUrl}/auth/me`,
+      url: `${authApiBaseUrl}/auth/me/`,
       method: 'GET',
     },
   }).then((data: AxiosResponse<Users.UserApi>) => ({
@@ -54,7 +54,7 @@ const getMe = (): Promise<AxiosResponse<Users.User>> => {
 const updateMe = (data: Partial<Auth.User>): Promise<AxiosResponse<Users.User>> => {
   return request({
     options: {
-      url: `${authApiBaseUrl}/auth/me`,
+      url: `${authApiBaseUrl}/auth/me/`,
       method: 'PUT',
       data,
     },
@@ -67,7 +67,7 @@ const updateMe = (data: Partial<Auth.User>): Promise<AxiosResponse<Users.User>> 
 const deleteMe = (): Promise<AxiosResponse<Users.User>> => {
   return request({
     options: {
-      url: `${authApiBaseUrl}/auth/me`,
+      url: `${authApiBaseUrl}/auth/me/`,
       method: 'DELETE',
     },
   });

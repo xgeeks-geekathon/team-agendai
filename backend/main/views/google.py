@@ -160,16 +160,16 @@ def callback(request: HttpRequest) -> HttpResponseRedirect:
     user_helper = UserHelper(google.get_user_info(), request)
 
     # Check if User Info is valid to login
-    if not user_helper.email_is_valid:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            _(
-                f"Email address not allowed: {user_helper.user_email}. "
-                f"Please contact your administrator."
-            ),
-        )
-        return HttpResponseRedirect(login_failed_url)
+    # if not user_helper.email_is_valid:
+    #     messages.add_message(
+    #         request,
+    #         messages.ERROR,
+    #         _(
+    #             f"Email address not allowed: {user_helper.user_email}. "
+    #             f"Please contact your administrator."
+    #         ),
+    #     )
+    #     return HttpResponseRedirect(login_failed_url)
 
     # Get or Create User
     if conf.GOOGLE_SSO_AUTO_CREATE_USERS:

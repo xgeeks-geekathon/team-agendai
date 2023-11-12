@@ -1,20 +1,15 @@
 import { AxiosResponse } from 'axios';
 
-import { fakeRequest, request } from '@core/clients/baseClient';
+import { request } from '@core/clients/baseClient';
 import { mapEventData } from './eventClient.formatter';
-import { getFakeEvent, getFakeEvents } from './eventClient.mocks';
 
 const EventsApiBaseUrl = import.meta.env.VITE__API_URL;
 
 const getEvent = (params: { id: number }): Promise<AxiosResponse<Events.Event>> => {
-  return fakeRequest({
+  return request({
     options: {
-      url: `${EventsApiBaseUrl}/events/${params.id}`,
+      url: `${EventsApiBaseUrl}/events/${params.id}/`,
       method: 'GET',
-    },
-    response: {
-      status: 200,
-      data: getFakeEvent(),
     },
   }).then((data: AxiosResponse<Events.EventApi>) => ({
     ...data,
@@ -23,18 +18,11 @@ const getEvent = (params: { id: number }): Promise<AxiosResponse<Events.Event>> 
 };
 
 const getEvents = (params: Events.GetListParams): Promise<AxiosResponse<MT.Query.PaginatedResults<Events.Event>>> => {
-  return fakeRequest({
+  return request({
     options: {
-      url: `${EventsApiBaseUrl}/events`,
+      url: `${EventsApiBaseUrl}/events/`,
       method: 'GET',
       params,
-    },
-    response: {
-      status: 200,
-      data: {
-        count: 10,
-        results: getFakeEvents(),
-      },
     },
   }).then((data: AxiosResponse<MT.Query.PaginatedResults<Events.EventApi>>) => ({
     ...data,
