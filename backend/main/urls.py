@@ -58,7 +58,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("oauth/google/", include(oauth_urls, namespace="oauth-google-sso")),
     path("auth/me/", auth.me, name="auth-me"),
-    path("auth/register/", auth.register, name="auth-register"),
+    path("auth/register/", auth.register, name="auth-register-redirect"),
     path("boards/", include(boards_urls, namespace="boards")),
     path("events/", include(events_urls, namespace="events")),
     path("tasks/", include(tasks_urls, namespace="tasks")),

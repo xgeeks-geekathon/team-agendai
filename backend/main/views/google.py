@@ -202,4 +202,12 @@ def callback(request: HttpRequest) -> HttpResponseRedirect:
     login(request, user, conf.GOOGLE_SSO_AUTHENTICATION_BACKEND)
     request.session.set_expiry(conf.GOOGLE_SSO_SESSION_COOKIE_AGE)
 
+    # dirty code
+    from main.models.profile import Profile
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    if not created:
+        profile.google_access_token = request.session["google_sso_access_token"]
+        profile.save()
+    ####
+
     return HttpResponseRedirect(next_url or reverse(conf.GOOGLE_SSO_NEXT_URL))

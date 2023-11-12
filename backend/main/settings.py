@@ -141,6 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 GOOGLE_SSO_CLIENT_ID = os.getenv("GOOGLE_SSO_CLIENT_ID")
 GOOGLE_SSO_CLIENT_SECRET = os.getenv("GOOGLE_SSO_CLIENT_SECRET")
 GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL", "auth-register")
+FRONT_AUTH_REDIRECT = os.getenv("FRONT_AUTH_REDIRECT", "http://localhost:3000/")
 
 JIRA_TOKEN = os.getenv("JIRA_TOKEN")
 JIRA_URL = os.getenv("JIRA_URL")
