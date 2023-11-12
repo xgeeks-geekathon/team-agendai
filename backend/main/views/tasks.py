@@ -31,7 +31,7 @@ def list_all(request: Any) -> JsonResponse:
                 existing_objects.append(result.id)
                 continue
 
-            fields = {}
+            fields = {"user_id": request.user.id}
             for model_field, field in TASKS_FIELDS_MAPPING.items():
                 fields[model_field] = explore_nested_object(result, field)
 
