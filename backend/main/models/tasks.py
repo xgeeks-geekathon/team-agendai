@@ -43,3 +43,5 @@ class Tasks(models.Model):
     created_at = models.CharField(max_length=32, null=True, blank=True)
     # updated_at: issue.fields.updated,
     updated_at = models.CharField(max_length=32, null=True, blank=True)
+    # link to event
+    event = models.ForeignKey("main.events", related_name="task", on_delete=models.DO_NOTHING, null=True)
