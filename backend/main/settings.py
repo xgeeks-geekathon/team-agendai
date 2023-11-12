@@ -28,7 +28,15 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "34.211.69.61",
+    "ec2-34-211-69-61.us-west-2.compute.amazonaws.com",
+    "http://ec2-34-211-69-61.us-west-2.compute.amazonaws.com",
+    "https://dag3s7val8pol.cloudfront.net",
+    "http://dag3s7val8pol.cloudfront.net",
+    "dag3s7val8pol.cloudfront.net",
+    "localhost"
+]
 
 
 # Application definition
@@ -40,8 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "profile",
-    "jira",
     "main",
     "django_google_sso",  # Add django_google_sso
 ]
@@ -54,7 +60,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "main.decorators.AuthenticateUserWithDjangoSessionMiddleware",
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -135,7 +140,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Handle exception for missing mandatory variable env
 GOOGLE_SSO_CLIENT_ID = os.getenv("GOOGLE_SSO_CLIENT_ID")
 GOOGLE_SSO_CLIENT_SECRET = os.getenv("GOOGLE_SSO_CLIENT_SECRET")
-GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL")
+GOOGLE_SSO_NEXT_URL = os.getenv("GOOGLE_SSO_NEXT_URL", "auth-me")
 
 JIRA_TOKEN = os.getenv("JIRA_TOKEN")
 JIRA_URL = os.getenv("JIRA_URL")
+JIRA_AUTHENTICATION_EMAIL = os.getenv("JIRA_AUTHENTICATION_EMAIL")
+JIRA_AUTHENTICATION_ACCESS_TOKEN = os.getenv("JIRA_AUTHENTICATION_ACCESS_TOKEN")
+
+GOOGLE_SSO_ALLOWABLE_DOMAINS = ["gmail.com"]

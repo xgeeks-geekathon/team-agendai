@@ -1,41 +1,30 @@
+from functools import wraps
+
+from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
-from django.core.management.commands.diffsettings import module_to_dict
-from django.shortcuts import redirect
 
 
-class AuthenticateUserWithDjangoSessionMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-        # One-time configuration and initialization.
+def session_authentication():
+    """
+    Decorator to check if the request have a current session id and add the user to the request.
 
-    def __call__(self, request):
-        # Code to be executed for each request before
-        # the view (and later middleware) are called.
-        # redirect user to login page
-        if "oauth/google/login" in request.META["PATH_INFO"] or "oauth/google/callback" in request.META["PATH_INFO"]:
-            response = self.get_response(request)
-        elif "sessionid" not in request.COOKIES:
-            return redirect("/oauth/google/login/")
-        else:
-            # validate if Session is still validate and add user to request
-            current_session = Session.objects.get(session_key=request.COOKIES["sessionid"])
-            current_session.get_decoded()
+        @session_authentication()
+        def my_view(request):
+            # request.user => should contain an authenticated user
+            # ...
 
-            # check django Session of the request
-            """
-            session = Session.objects.filter(
-                # pylint: disable=protected-access
-                session_key=request.session._session_key
-            ).first()
+    In case of error it will redirect to the authentication login
+    """
 
-            session_data = session.get_decoded()
-            # let this raise the key error
-            #request.user = User.objects.get(id=session_data["_auth_user_id"])
-            """
-            response = self.get_response(request)
+    def decorator(func):
+        @wraps(func)
+        def inner(request, *args, **kwargs):
+            current_session = Session.objects.filter(session_key=request.COOKIES["sessionid"]).first()
 
+            if current_session:
+                session_dict = current_session.get_decoded()
+                request.user = User.objects.get(id=session_dict["_auth_user_id"])
 
-            # Code to be executed for each request/response after
-            # the view is called.
-
-        return response
+            return func(request, *args, **kwargs)
+        return inner
+    return decorator

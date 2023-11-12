@@ -1,29 +1,10 @@
 import datetime
 from itertools import chain
-from typing import Any
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
 
 
-#@login_required(login_url="oauth/google/login/")
-@require_http_methods(["GET", "POST"])
-def me(request: Any):
-    """
-
-    :param request:
-    :return:
-    """
-
-    # get user information
-    # for now is just the first to help the evolution of the code
-
-    return JsonResponse(data={"data": model_to_dict(User.objects.first(), exclude=["password"])}, status=200)
-
-
-def model_to_dict(instance:"User", fields:list=None, exclude:list=None) -> dict:
+def model_to_dict(instance: "User", fields: list = None, exclude: list = None) -> dict:
     """
     Return a dict containing the data in ``instance`` suitable for passing as
     a Form's ``initial`` keyword argument.
