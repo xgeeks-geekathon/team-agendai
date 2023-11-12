@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0007_alter_taskenhancement_value'),
+        ('main', '0008_remove_boards_tasks_tasks_board'),
     ]
 
     operations = [
