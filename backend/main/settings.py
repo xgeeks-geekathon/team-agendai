@@ -156,3 +156,4 @@ GOOGLE_SSO_SCOPES = [
     "https://www.googleapis.com/auth/calendar.events",
 ]
 SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", False)
+OPENAPI_KEY = os.getenv("OPENAPI_KEY")

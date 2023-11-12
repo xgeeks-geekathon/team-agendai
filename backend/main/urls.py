@@ -38,7 +38,7 @@ tasks_urls = (
     "tasks"
 )
 
-tasks__enhancement_urls = (
+tasks_enhancement_urls = (
     [
         path("", tasks_enhancement.list_all, name="list"),
     ],
@@ -62,5 +62,5 @@ urlpatterns = [
     path("boards/", include(boards_urls, namespace="boards")),
     path("events/", include(events_urls, namespace="events")),
     path("tasks/", include(tasks_urls, namespace="tasks")),
-    path("tasks-enhancement/", include(tasks_urls, namespace="tasks-enhancement")),
+    path("tasks-enhancement/", include(tasks_enhancement_urls, namespace="tasks-enhancement")),
 ]
