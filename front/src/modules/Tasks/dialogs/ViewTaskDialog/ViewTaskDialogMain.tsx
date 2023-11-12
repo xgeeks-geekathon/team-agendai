@@ -10,7 +10,7 @@ export const ViewTaskDialogMain: React.FC<Props> = ({ task }) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Stack direction="row" pt={2} mb={1} spacing={1} alignItems="center">
-            <Avatar src={task.typeIcon} alt={task.type.name} sx={{ width: 16, height: 16 }} variant="square" />
+            <Avatar src={task.typeIcon} alt={task.typeName} sx={{ width: 16, height: 16 }} variant="square" />
             <Typography variant="body2" color="secondary" fontWeight={500}>{task.originalId}</Typography>
           </Stack>
           <Typography variant="h3" component="h1">

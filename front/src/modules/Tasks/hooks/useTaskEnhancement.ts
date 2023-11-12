@@ -4,7 +4,7 @@ import { cacheKeys } from '../config';
 import { tasksClient } from '../client/tasksClient';
 
 export type Params = {
-  id: number;
+  id: number | string;
 };
 
 type Options = {

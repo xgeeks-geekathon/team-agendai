@@ -17,11 +17,11 @@ interface Props {
 export const ViewTaskDialogEnhance: React.FC<Props> = ({ task, onApprove }) => {
 
   const { generateEnhancement } = useTaskCrud();
-  const { enhancement, status } = useTaskEnhancement({ id: task.id });
+  const { enhancement, status } = useTaskEnhancement({ id: task.issueId });
 
   const onGenerate = React.useCallback(() => {
-    generateEnhancement.mutateAsync(task.id);
-  }, [generateEnhancement, task.id]);
+    generateEnhancement.mutateAsync(task.issueId);
+  }, [generateEnhancement, task.issueId]);
 
   return (
     <Grid container spacing={2}>

@@ -76,7 +76,7 @@ export const useTaskCrud = () => {
 
   const generateEnhancement = useMutation({
     mutationKey: [cacheKeys.generateEnhancement],
-    mutationFn: (id: number) => tasksClient.generateTaskEnhancement({ id }),
+    mutationFn: (id: number | string) => tasksClient.generateTaskEnhancement({ id }),
     onSuccess: (data, id) => {
       queryClient.invalidateQueries({
         queryKey: [cacheKeys.getEnhancement, {
