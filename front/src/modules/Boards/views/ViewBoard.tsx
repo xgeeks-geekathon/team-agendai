@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { MessageFeedbackView } from '@core/components/MessageFeedbackView';
 import { BodyLoading } from '@core/components/layout/BodyLoading';
@@ -11,7 +11,7 @@ import { useBoard } from '../hooks/useBoard';
 const BoardSection: React.FC<Boards.Board> = board => {
   return (
     <Box textAlign="center" mb={2}>
-      <Typography variant="h1">{board.title}</Typography>
+      {/* <Typography variant="h1">{board.title}</Typography> */}
     </Box>
   );
 };

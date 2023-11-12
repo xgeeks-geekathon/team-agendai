@@ -7,27 +7,17 @@ declare namespace MT {
 };
 
 declare namespace Tasks {
-
-  export interface TaskAssignee {
-    name: string;
-    avatar: string;
-  }
-
-  export interface TaskType {
-    name: string;
-    icon: string;
-  }
-
   interface TaskAttributes {
     title: string;
-    type: TaskType;
     status: string;
     originalId: string;
     description: string;
-    assignee: TaskAssignee;
+    assigneeName: string;
+    assigneeAvatar: string;
     estimation: number;
     priority: number;
-  
+    typeName: string;
+    typeIcon: string;
     createdAt: Date;
     updatedAt: Date;
   }

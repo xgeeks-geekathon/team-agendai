@@ -14,7 +14,7 @@ export const TaskListItemCard: React.FC<Props> = ({ onClick, ...task }) => {
           <Stack width="100%" direction="row" spacing={2} justifyContent="space-between" alignItems="center">
             <Stack direction="row" spacing={2} alignItems="center">
               <Stack direction="row" spacing={1} alignItems="center">
-                <Avatar src={task.type.icon} alt={task.type.name} sx={{ width: 16, height: 16 }} variant="square" />
+                <Avatar src={task.typeIcon} alt={task.typeName} sx={{ width: 16, height: 16 }} variant="square" />
                 <Typography variant="body2" color="secondary" fontWeight={500}>{task.originalId}</Typography>
               </Stack>
               <Typography variant="h6" component="div">
@@ -25,8 +25,8 @@ export const TaskListItemCard: React.FC<Props> = ({ onClick, ...task }) => {
               <Typography variant="body2" color="secondary">
                 {formatDistanceToNow(task.createdAt, { addSuffix: true })}
               </Typography>
-              <Tooltip title={task.assignee.name}>
-                <Avatar src={task.assignee.avatar} alt={task.assignee.name} sx={{ width: 24, height: 24 }} />
+              <Tooltip title={task.assigneeName}>
+                <Avatar src={task.assigneeAvatar} alt={task.assigneeName} sx={{ width: 24, height: 24 }} />
               </Tooltip>
             </Stack>
           </Stack>

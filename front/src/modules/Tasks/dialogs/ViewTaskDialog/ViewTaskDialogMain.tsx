@@ -10,7 +10,7 @@ export const ViewTaskDialogMain: React.FC<Props> = ({ task }) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Stack direction="row" pt={2} mb={1} spacing={1} alignItems="center">
-            <Avatar src={task.type.icon} alt={task.type.name} sx={{ width: 16, height: 16 }} variant="square" />
+            <Avatar src={task.typeIcon} alt={task.type.name} sx={{ width: 16, height: 16 }} variant="square" />
             <Typography variant="body2" color="secondary" fontWeight={500}>{task.originalId}</Typography>
           </Stack>
           <Typography variant="h3" component="h1">
@@ -19,8 +19,8 @@ export const ViewTaskDialogMain: React.FC<Props> = ({ task }) => {
         </Grid>
         <Grid item xs={12}>
           <Stack direction="row" spacing={1} alignItems="center">
-            <Avatar src={task.assignee.avatar} alt={task.assignee.name} sx={{ width: 24, height: 24 }} />
-            <Typography variant="body2" color="text.light">{task.assignee.name}</Typography>
+            <Avatar src={task.assigneeAvatar} alt={task.assigneeName} sx={{ width: 24, height: 24 }} />
+            <Typography variant="body2" color="text.light">{task.assigneeName}</Typography>
           </Stack>
         </Grid>
         <Grid item xs={12}>

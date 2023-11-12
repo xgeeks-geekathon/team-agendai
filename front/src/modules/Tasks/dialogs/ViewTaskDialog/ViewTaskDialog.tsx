@@ -63,6 +63,7 @@ export const ViewTaskDialog: React.FC<Props> = ({ open, onClose, data }) => {
           left: theme.spacing(1.5),
           right: theme.spacing(1.5),
           bottom: theme.spacing(1.5),
+          width: '100%',
           maxWidth: theme.breakpoints.values.md,
           margin: 'auto',
         }),

@@ -1,8 +1,7 @@
 import { AxiosResponse } from 'axios';
 
-import { fakeRequest, request } from '@core/clients/baseClient';
+import { request } from '@core/clients/baseClient';
 import { mapEnchancementData, mapTaskData } from './tasksClient.formatter';
-import { getFakeEnchancement } from './tasksClient.mocks';
 
 const tasksApiBaseUrl = import.meta.env.VITE__API_URL;
 
@@ -82,14 +81,10 @@ const deleteTask = (params: { id: number | string }): Promise<AxiosResponse> => 
 };
 
 const getTaskEnhancement = (params: { id: number }): Promise<AxiosResponse<Tasks.Enhancement.Enhancement>> => {
-  return fakeRequest({
+  return request({
     options: {
       url: `${tasksApiBaseUrl}/tasks-enhancement/${params.id}/`,
       method: 'GET',
-    },
-    response: {
-      status: 200,
-      data: getFakeEnchancement(),
     },
   }).then((data: AxiosResponse<Tasks.Enhancement.EnhancementApi>) => ({
     ...data,
@@ -98,15 +93,10 @@ const getTaskEnhancement = (params: { id: number }): Promise<AxiosResponse<Tasks
 };
 
 const generateTaskEnhancement = (params: { id: number }): Promise<AxiosResponse<Tasks.Enhancement.Enhancement>> => {
-  return fakeRequest({
+  return request({
     options: {
       url: `${tasksApiBaseUrl}/tasks-enhancement/${params.id}/`,
       method: 'POST',
-      timeout: 2000,
-    },
-    response: {
-      status: 200,
-      data: getFakeEnchancement(),
     },
   }).then((data: AxiosResponse<Tasks.Enhancement.EnhancementApi>) => ({
     ...data,

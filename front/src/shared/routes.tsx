@@ -78,7 +78,7 @@ export const navigation = (router: MT.Routing.RecursiveRoutes<typeof routes>, di
   }, {
     icon: <Grading color="inherit"/>,
     text: dictionary.menu.board.list,
-    route: router.boards.path,
+    route: router.boards.view(1).path,
     requiresAuth: true,
   }],
 });

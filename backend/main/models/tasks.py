@@ -12,7 +12,9 @@ TASKS_FIELDS_MAPPING = {
     "issue_id": "id",
     "estimation": "fields.timeestimate",
     "created_at": "fields.created",
-    "updated_at": "fields.updated"
+    "updated_at": "fields.updated",
+    "type_icon": "fields.issuetype.iconUrl",
+    "type_name": "fields.issuetype.name"
 }
 
 
@@ -23,6 +25,8 @@ class Tasks(models.Model):
     #     name: issue.fields.assignee.displayName,
     #     avatar: issue.fields.assignee.avatarUrls['48x48'],
     # },
+    type_icon = models.CharField(max_length=512, null=True, blank=True)
+    type_name = models.CharField(max_length=512, null=True, blank=True)
     assignee_name = models.CharField(max_length=512, null=True, blank=True)
     assignee_avatar = models.CharField(max_length=512, null=True, blank=True)
     # priority: 0,

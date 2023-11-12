@@ -77,14 +77,14 @@ export const Calendar = () => {
                 return (
                   <Stack direction="column" alignItems="left">
                     <Stack direction="row" spacing={1} alignItems="center">
-                      <Avatar src={task.type.icon} alt={task.type.name} sx={{ width: 16, height: 16 }} variant="square" />
+                      <Avatar src={task.typeIcon} alt={task.typeName} sx={{ width: 16, height: 16 }} variant="square" />
                       <Typography variant="body2">{task.originalId}</Typography>
                     </Stack>
                     <Typography variant="body1" component="div" fontWeight={500}>
                       {task.title}
                     </Typography>
-                    <Tooltip title={task.assignee.name}>
-                      <Avatar src={task.assignee.avatar} alt={task.assignee.name} sx={{ mt: 1, width: 24, height: 24 }} />
+                    <Tooltip title={task.assigneeName}>
+                      <Avatar src={task.assigneeAvatar} alt={task.assigneeName} sx={{ mt: 1, width: 24, height: 24 }} />
                     </Tooltip>
                   </Stack>
                 );
