@@ -16,14 +16,16 @@ declare namespace Events {
   };
 
   interface EventAttributes {
-    title: string;
+    calendarId: string;
+    htmlLink: string;
+    summary: string;
     accessToken: string;
     description: string;
     attendees: EventAttendee[];
     createdAt: Date;
-    startDate: Date;
-    endDate: Date;
-    updatedAt: Date;
+    start: Date;
+    end: Date;
+    updated: Date;
     task: MT.MaybeNull<number>;
   }
 

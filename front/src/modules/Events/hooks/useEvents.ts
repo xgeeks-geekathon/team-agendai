@@ -21,7 +21,7 @@ export const useEvents = (params: Events.GetListParams = {}, options: Partial<Op
   return {
     status,
     error,
-    count: data?.count || 0,
-    events: data?.results || [],
+    count: data?.data.length || 0,
+    events: data?.data || [],
   };
 };

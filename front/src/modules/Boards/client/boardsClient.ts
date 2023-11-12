@@ -40,7 +40,7 @@ const getBoards = (params: Boards.GetListParams): Promise<AxiosResponse<MT.Query
     ...data,
     data: {
       ...data.data,
-      results: data.data.results.map(mapBoardData),
+      data: data.data.data.map(mapBoardData),
     },
   }));
 };

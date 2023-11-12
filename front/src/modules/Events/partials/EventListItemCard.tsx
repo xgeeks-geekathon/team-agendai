@@ -21,10 +21,10 @@ export const EventListItemCard: React.FC<Events.Event> = event => {
           <Stack direction="row" justifyContent="space-between">
             <Box>
               <Typography gutterBottom variant="body2" color="secondary">
-                {format(event.startDate ,'dd/MM')} - {format(event.startDate ,'hh:mm')} - {format(event.endDate ,'hh:mm')}
+                {format(event.start ,'dd/MM')} - {format(event.start ,'hh:mm')} - {format(event.end ,'hh:mm')}
               </Typography>
               <Typography gutterBottom variant="h6" component="div">
-                {event.title}
+                {event.summary}
               </Typography>
             </Box>
             <Stack direction="row">

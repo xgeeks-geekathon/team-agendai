@@ -28,7 +28,7 @@ const getEvents = (params: Events.GetListParams): Promise<AxiosResponse<MT.Query
     ...data,
     data: {
       ...data.data,
-      results: data.data.results.map(mapEventData),
+      data: data.data.data.map(mapEventData),
     },
   }));
 };

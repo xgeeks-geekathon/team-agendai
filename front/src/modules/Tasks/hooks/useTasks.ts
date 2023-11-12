@@ -21,7 +21,7 @@ export const useTasks = (params: Tasks.GetListParams = {}, options: Partial<Opti
   return {
     status,
     error,
-    count: data?.count || 0,
-    tasks: data?.results || [],
+    count: data?.data.length || 0,
+    tasks: data?.data || [],
   };
 };

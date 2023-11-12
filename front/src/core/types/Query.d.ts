@@ -11,7 +11,7 @@ declare namespace MT {
       count: number;
       next: MT.MaybeNull<string>;
       previous: MT.MaybeNull<string>;
-      results: T[];
+      data: T[];
     };
   };
 }
