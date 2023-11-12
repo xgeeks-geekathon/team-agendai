@@ -8,8 +8,8 @@ EVENTS_FIELDS_MAPPING = {
     "updated": "updated",
     "summary": "summary",
     "description": "description",
-    "start": "start.date",
-    "end": "start.date",
+    "start": "start.dateTime",
+    "end": "end.dateTime",
     "attendees": "attendees",
     "organizer": "organizer",
 }
