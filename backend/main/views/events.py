@@ -61,7 +61,7 @@ def list_all(request: Any) -> JsonResponse:
             "data": serialized_objects + [model_to_dict(item) for item in existing_objects]
         }
         status = 201
-    except (AttributeError, Exception) as error:
+    except (AttributeError, Exception):
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

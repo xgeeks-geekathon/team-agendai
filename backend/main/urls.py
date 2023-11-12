@@ -21,6 +21,7 @@ from main.views import auth, boards, events, google, tasks, tasks_enhancement
 boards_urls = (
     [
         path("", boards.list_all, name="list"),
+        path("", boards.create, name="create"),
     ],
     "boards"
 )
@@ -34,6 +35,7 @@ events_urls = (
 tasks_urls = (
     [
         path("", tasks.list_all, name="list"),
+        path("<int:task_id>/", tasks.list_all, name="details"),
         path("<int:task_id>/enhancement/", tasks_enhancement.enhancement, name="tasks-enhancement"),
     ],
     "tasks"

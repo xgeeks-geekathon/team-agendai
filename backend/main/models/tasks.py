@@ -20,6 +20,7 @@ TASKS_FIELDS_MAPPING = {
 
 class Tasks(models.Model):
     project_id = models.CharField(max_length=512, null=True, blank=True)
+    board = models.ForeignKey("main.boards", related_name="task", null=True, default=None, on_delete=models.DO_NOTHING)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING)
     # assignee: {
     #     name: issue.fields.assignee.displayName,

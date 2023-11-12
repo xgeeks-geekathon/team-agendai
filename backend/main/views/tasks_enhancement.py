@@ -49,9 +49,12 @@ def list_all(__: Any, task_id: int = None) -> JsonResponse:
     status = 200
     try:
         if task_id:
-            response_data = {model_to_dict(TaskEnhancement.objects.get(task__issue_id=task_id))}
+            response_data = model_to_dict(TaskEnhancement.objects.get(task__issue_id=task_id))
         else:
             response_data = {"result": [model_to_dict(item) for item in TaskEnhancement.objects.all()]}
+    except TaskEnhancement.DoesNotExist:
+        response_data = {"message": f"Task enhanced '{task_id}' does not exist"}
+        status = 404
     except (AttributeError, Exception):
         response_data = {"message": "Something went wrong during the process"}
         status = 400
