@@ -1,3 +1,8 @@
+"""
+Copy "copied" from django-google-sso because the callback url wasn't getting all the credentials, check callback() for
+more information.
+"""
+
 import importlib
 from urllib.parse import urlparse
 

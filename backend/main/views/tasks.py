@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from django.http import JsonResponse
@@ -8,6 +9,8 @@ from main.jira_service import JiraSingleton
 from main.models import Tasks, Boards
 from main.models.tasks import TASKS_FIELDS_MAPPING
 from main.utils import explore_nested_object, model_to_dict
+
+LOGGER = logging.getLogger("console")
 
 
 @require_http_methods(["GET"])
@@ -68,7 +71,8 @@ def list_all(request: Any, task_id: int = None) -> JsonResponse:
     except Tasks.DoesNotExist:
         response_data = {"message": f"Task '{task_id}' does not exist"}
         status = 404
-    except (AttributeError, Exception):
+    except (AttributeError, Exception) as error:
+        LOGGER.error(error)
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

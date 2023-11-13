@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from django.http import JsonResponse
@@ -6,6 +7,8 @@ from django.views.decorators.http import require_http_methods
 from main.decorators import session_authentication
 from main.models import Boards
 from main.utils import model_to_dict
+
+LOGGER = logging.getLogger("console")
 
 
 @require_http_methods(["GET"])
@@ -24,7 +27,8 @@ def list_all(request: Any) -> JsonResponse:
             "data": [model_to_dict(item) for item in Boards.objects.filter(user=request.user)]
         }
         status = 200
-    except (AttributeError, Exception):
+    except (AttributeError, Exception) as error:
+        LOGGER.error(error)
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 
@@ -49,7 +53,8 @@ def create(request: Any) -> JsonResponse:
         }
 
         status = 200 if not created else 201
-    except (AttributeError, Exception):
+    except (AttributeError, Exception) as error:
+        LOGGER.error(error)
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

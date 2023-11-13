@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from django.http import JsonResponse
@@ -10,6 +11,7 @@ from main.models import Events
 from main.models.events import EVENTS_FIELDS_MAPPING
 from main.utils import explore_nested_object, model_to_dict
 
+LOGGER = logging.getLogger("console")
 
 @require_http_methods(["GET"])
 @session_authentication()
@@ -61,7 +63,8 @@ def list_all(request: Any) -> JsonResponse:
             "data": serialized_objects + [model_to_dict(item) for item in existing_objects]
         }
         status = 201
-    except (AttributeError, Exception):
+    except (AttributeError, Exception) as error:
+        LOGGER.error(error)
         response_data = {"message": "Something went wrong during the process"}
         status = 400
 

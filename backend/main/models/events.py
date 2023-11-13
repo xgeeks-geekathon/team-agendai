@@ -28,3 +28,13 @@ class Events(models.Model):
     end = models.CharField(max_length=32, null=True, blank=True)
     attendees = models.JSONField(null=True, blank=True, default=None)
     organizer = models.JSONField(null=True, blank=True, default=None)
+    # should be singular
+    task = models.ForeignKey(
+        "main.tasks",
+        related_name="event",
+        default=None,
+        null=True,
+        blank=True,
+        on_delete=models.DO_NOTHING
+    )
+

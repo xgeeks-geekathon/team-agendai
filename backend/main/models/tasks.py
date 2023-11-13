@@ -10,7 +10,7 @@ TASKS_FIELDS_MAPPING = {
     "description": "fields.description",
     "status": "fields.status.name",
     "issue_id": "id",
-    "estimation": "fields.timeestimate",
+    "estimation": "fields.customfield_10016",
     "created_at": "fields.created",
     "updated_at": "fields.updated",
     "type_icon": "fields.issuetype.iconUrl",
@@ -48,5 +48,3 @@ class Tasks(models.Model):
     created_at = models.CharField(max_length=32, null=True, blank=True)
     # updated_at: issue.fields.updated,
     updated_at = models.CharField(max_length=32, null=True, blank=True)
-    # link to event
-    event = models.ForeignKey("main.events", related_name="task", on_delete=models.DO_NOTHING, null=True)
